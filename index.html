@@ -274,7 +274,7 @@ async function refreshAll(){
       + "&$filter="+encodeURIComponent("startswith(subject,'RFQ Completion Notification') and createdon ge "+win));
 
     // --- 3. Approvals (ssg_approvalhistory) ---
-    const approvals = await dvGet("ssg_approvalhistories?$select=ssg_name,ssg_approvaltype,ssg_status,ssg_approvedrejectedon,ssg_approvername,createdon,modifiedon,_ssg_quote_value"
+    const approvals = await dvGet("ssg_approvalhistories?$select=ssg_name,ssg_approvaltype,ssg_status,ssg_approvedrejectedon,_ssg_approver_value,createdon,modifiedon,_ssg_quote_value"
       + "&$filter="+encodeURIComponent("createdon ge "+win));
 
     // --- 4. Work Orders (Candoo division) ---
@@ -304,7 +304,7 @@ async function refreshAll(){
     approvals.forEach(a=>{ const g=(a._ssg_quote_value||'').toLowerCase(); const qn = quoteByGuid[g]; if(!qn) return;
       (apprByQ[qn] = apprByQ[qn] || []).push({ type:a['ssg_approvaltype'+F]||'', typeVal:a.ssg_approvaltype,
         status:a['ssg_status'+F]||'', statusVal:a.ssg_status, actionDate:a.ssg_approvedrejectedon,
-        approver:a.ssg_approvername||'', created:a.createdon, modified:a.modifiedon }); });
+        approver:a['_ssg_approver_value'+F]||'', created:a.createdon, modified:a.modifiedon }); });
 
     const woByQ = {};
     wos.forEach(w=>{ const qn=w.ssg_quotenumber; if(!qn) return;
