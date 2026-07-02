@@ -40,45 +40,47 @@
   .dot.live{background:#7CE3A6;box-shadow:0 0 0 3px rgba(124,227,166,.25);} .dot.err{background:#ff9a96;}
   .hbtn{cursor:pointer;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:6px 15px;font-size:12.5px;font-weight:600;transition:.15s;font-family:inherit;}
   .hbtn:hover{background:rgba(255,255,255,.26);}
-  /* ---- controls ---- */
-  .controls{display:flex;align-items:flex-end;gap:14px;padding:14px 30px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap;box-shadow:0 1px 0 rgba(31,70,107,.04);}
-  .ctrl{display:flex;flex-direction:column;gap:4px;}
-  .ctrl label{font-size:10.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
-  select,input[type=text],input[type=date]{background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 11px;font-size:13px;font-family:inherit;}
-  input[type=text]{min-width:230px;}
+  /* ---- controls (compact) ---- */
+  .controls{display:flex;align-items:center;gap:12px;padding:9px 30px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .ctrl{display:flex;align-items:center;gap:7px;}
+  .ctrl label{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+  select,input[type=text],input[type=date]{background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 9px;font-size:12.5px;font-family:inherit;}
+  input[type=text]{min-width:210px;}
   input:focus,select:focus{outline:none;border-color:var(--steel);box-shadow:0 0 0 3px rgba(97,143,180,.15);}
-  .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto;}
-  .kpi{background:linear-gradient(180deg,#fff,#fafcfe);border:1px solid var(--line);border-radius:12px;padding:8px 16px;text-align:center;min-width:88px;box-shadow:var(--shadow);}
-  .kpi b{display:block;font-size:18px;color:var(--slate);} .kpi span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+  .kpis{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
+  .kpi{background:linear-gradient(180deg,#fff,#fafcfe);border:1px solid var(--line);border-radius:10px;padding:5px 13px;text-align:center;min-width:80px;box-shadow:var(--shadow);}
+  .kpi b{display:block;font-size:16px;color:var(--slate);line-height:1.2;} .kpi span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
   /* ---- section headings ---- */
-  .kpiPanel{padding:16px 30px 4px;}
-  .kpiPanel h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--slate);margin:4px 0 13px;font-weight:800;border-left:3px solid var(--steel);padding-left:10px;}
+  .kpiPanel{padding:13px 30px 2px;}
+  .kpiPanel h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--slate);margin:2px 0 11px;font-weight:800;border-left:3px solid var(--steel);padding-left:10px;}
   .cardrow{display:flex;gap:13px;flex-wrap:wrap;}
   /* ---- Resident-360 style bucket cards ---- */
-  .bcard{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);min-width:182px;flex:1;display:flex;flex-direction:column;transition:.16s;}
+  .bcard{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);min-width:190px;flex:1;display:flex;flex-direction:column;transition:.16s;}
   .bcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
   .bcard::before{content:'';display:block;height:4px;background:var(--c);}
-  .bcard-head{display:flex;align-items:center;gap:9px;padding:12px 15px 8px;}
-  .bicon{font-size:19px;line-height:1;}
+  .bcard-head{display:flex;align-items:center;gap:9px;padding:11px 15px 7px;}
+  .bicon{font-size:18px;line-height:1;}
   .btitle{font-size:13px;font-weight:800;color:var(--c);letter-spacing:.2px;}
   .bdesc{font-size:10px;color:var(--muted);margin-top:1px;}
-  .brow{display:flex;justify-content:space-between;align-items:center;padding:7px 15px;border-top:1px solid #f1f4f9;}
-  .brow .blbl{font-size:11px;color:var(--muted);font-weight:600;}
-  .brow .bval{font-size:13.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;}
+  .brow{display:flex;justify-content:space-between;align-items:center;padding:6px 15px;border-top:1px solid #f1f4f9;gap:8px;}
+  .brow .blbl{font-size:10.5px;color:var(--muted);font-weight:600;white-space:nowrap;}
+  .brow .bval{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--ink);}
+  .brow .bval b{font-weight:800;}
+  .bavg{font-size:10.5px;color:var(--muted);font-weight:600;}
   .brow.cur{background:linear-gradient(180deg,#fafcfe,#f3f7fc);}
-  .brow.cur .bval.big{font-size:18px;font-weight:800;color:var(--c);}
-  .delta{font-size:11px;font-weight:800;white-space:nowrap;}
+  .brow.cur .bval.big{font-size:16px;}
+  .brow.cur .bval.big b{color:var(--c);}
+  .delta{font-size:10.5px;font-weight:800;white-space:nowrap;}
   .delta.pos{color:var(--good);} .delta.neg{color:var(--bad);} .delta.flat{color:#9aa7b5;}
-  .bn{font-size:9.5px;color:#aab6c6;font-weight:600;}
-  /* ---- procurement cards ---- */
-  .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 16px;min-width:150px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--ocean);transition:.16s;}
+  /* ---- procurement cards (short) ---- */
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 15px;min-width:150px;flex:1;box-shadow:var(--shadow);border-top:3px solid var(--ocean);transition:.16s;}
   .tcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
-  .tcard .lbl{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
-  .tcard .big{font-size:21px;font-weight:800;color:var(--ocean);margin-top:5px;}
-  .tcard .mini{font-size:10.5px;color:var(--muted);margin-top:6px;}
+  .tcard .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+  .tcard .big{font-size:19px;font-weight:800;color:var(--ocean);margin-top:2px;line-height:1.2;}
+  .tcard .mini{font-size:10px;color:var(--muted);margin-top:3px;}
   .big.good{color:var(--good);} .big.bad{color:var(--bad);}
   /* ---- table ---- */
-  .wrap{padding:16px 30px 46px;overflow:auto;}
+  .wrap{padding:14px 30px 46px;overflow:auto;}
   table{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);}
   thead th{position:sticky;top:0;background:linear-gradient(135deg,var(--slate),var(--ocean));color:#fff;text-align:left;padding:11px 12px;white-space:nowrap;font-weight:700;border-right:1px solid rgba(255,255,255,.12);}
   tbody td{padding:8px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);vertical-align:top;}
@@ -135,10 +137,10 @@
 <div class="controls" id="controls" style="display:none">
   <div class="ctrl"><label>From</label><input type="date" id="fromDate" onchange="refreshAll()"></div>
   <div class="ctrl"><label>To</label><input type="date" id="toDate" onchange="refreshAll()"></div>
-  <div class="ctrl"><label>Department</label>
+  <div class="ctrl"><label>Dept</label>
     <select id="deptSel" onchange="applyFilter()"><option value="">All Departments</option></select>
   </div>
-  <div class="ctrl"><label>Search</label><input type="text" id="search" placeholder="Quote no, project, PR, status…" oninput="render()"></div>
+  <div class="ctrl"><input type="text" id="search" placeholder="Search quote no, project, PR, status…" oninput="render()"></div>
   <div class="kpis">
     <div class="kpi"><b id="kQuotes">—</b><span>Quotes</span></div>
     <div class="kpi"><b id="kWO">—</b><span>Work Orders</span></div>
@@ -152,7 +154,7 @@
 <div class="kpiPanel" id="procKpis" style="display:none"></div>
 
 <div class="legend" id="legend" style="display:none">
-  Live pipeline — one row per quote, joined on <b>Quote No</b> (click a Quote No to open it in CRM). Durations show as <code>d/h/m</code>; hover any value for the start → end timestamps.
+  Live pipeline — one row per quote, joined on <b>Quote No</b> (click a Quote No to open it in CRM). Each bucket shows, per week, the <b>count</b> of quotes reaching that stage and their <b>average</b> completion time; the arrow compares the count to the prior week. Durations: hover for start → end.
   <b>Drafting</b> = opportunity created → PR created (or, when no PR, → internal/markup approval created) · <b>RFQ Process</b> = PR created → RFQ-completion email · <b>Internal Approval</b> = Quote + Markup Range approval created → modified (when Approved) · <b>Customer Approval</b> = Customer approval created → modified · <b>Work Execution</b> = WO created → booking End Job · <b>Ageing</b> = opportunity created → now.
 </div>
 
@@ -178,7 +180,7 @@
 
 <script>
 /* =====================================================================
-   CONFIG — reused from the existing live dashboards (same environment)
+   CONFIG
    ===================================================================== */
 const CRM_ORG    = 'https://operations-ifahr-live.crm15.dynamics.com';
 const CRM_BASE   = CRM_ORG + '/api/data/v9.2';
@@ -191,13 +193,13 @@ const MSAL_CONFIG = {
   },
   cache: { cacheLocation: 'localStorage', storeAuthStateInCookie: true }
 };
-const CANDOO_DIVISION = '93bd43eb-0a44-ef11-a316-6045bd6a8335';   // Work Order division filter
+const CANDOO_DIVISION = '93bd43eb-0a44-ef11-a316-6045bd6a8335';
 const PR_PROXY = 'https://pr-po-dashboard-proxy-b4budzexh7eveved.uaenorth-01.azurewebsites.net/api';
 const PR_CODE  = 'hxj_IHMOErx6gGKKJlZcIZkFm8hCh3dbkxckMOAf5XBMAzFuycxNog==';
 const F = '@OData.Community.Display.V1.FormattedValue';
 
 let msalInstance = null, account = null, crmToken = null, refreshTimer = null;
-let DATA = [];   // joined rows
+let DATA = [];
 
 function quoteUrl(id){ return CRM_ORG + '/main.aspx?pagetype=entityrecord&etn=quote&id=' + id; }
 
@@ -218,10 +220,7 @@ async function signIn(){
   const err=document.getElementById('loginErr'); err.style.display='none';
   try{
     await initMsal();
-    if(!account){
-      const r = await msalInstance.loginPopup({ scopes:['User.Read', CRM_SCOPE] });
-      account = r.account;
-    }
+    if(!account){ const r = await msalInstance.loginPopup({ scopes:['User.Read', CRM_SCOPE] }); account = r.account; }
     await enterApp();
   }catch(e){ err.textContent = e.message || String(e); err.style.display='block'; }
 }
@@ -253,12 +252,11 @@ function signOut(){ try{ msalInstance.logoutPopup(); }catch(e){} location.reload
 
 /* ============================ DATAVERSE GET (paged) ============================ */
 async function dvGet(path){
-  const token = crmToken || (crmToken = await getToken());
+  const token = crmToken;
   let url = CRM_BASE + '/' + path, out = [], guard = 0;
   while(url && guard++ < 200){
     let r = await fetch(url, { headers:{ Authorization:'Bearer '+token, Accept:'application/json',
       'OData-MaxVersion':'4.0','OData-Version':'4.0', Prefer:'odata.include-annotations="*",odata.maxpagesize=5000' }});
-    if(r.status===401){ crmToken = await getToken(); continue; }
     if(!r.ok){ throw new Error('CRM '+r.status+' '+(await r.text()).slice(0,160)); }
     const j = await r.json(); out = out.concat(j.value||[]); url = j['@odata.nextLink'] || null;
   }
@@ -290,7 +288,7 @@ function apprSpan(recs, typeVals){
   return {val: m2==null?null:fmtDurMs(m2), ms:m2, status, start, end};
 }
 
-/* ============================ LOAD + JOIN ============================ */
+/* ============================ LOAD + JOIN (parallel = fast) ============================ */
 async function refreshAll(){
   setStatus('syncing…','warn');
   try{
@@ -300,37 +298,26 @@ async function refreshAll(){
     const toISO   = new Date(document.getElementById('toDate').value   + 'T23:59:59').toISOString();
     const rng = "createdon ge "+fromISO+" and createdon le "+toISO;
 
-    // --- 1. Quotes (base) + parent opportunity createdon ---
-    const quotes = await dvGet("quotes?$select=quoteid,quotenumber,createdon,statuscode,name,_opportunityid_value"
-      + "&$expand=opportunityid($select=createdon,name)"
-      + "&$filter="+encodeURIComponent(rng));
+    // All six sources fetched CONCURRENTLY
+    const [quotes, emails, approvals, wos, bookings, prJson] = await Promise.all([
+      dvGet("quotes?$select=quoteid,quotenumber,createdon,statuscode,name,_opportunityid_value"
+        + "&$expand=opportunityid($select=createdon,name,ssg_textdepartment)"
+        + "&$filter="+encodeURIComponent(rng)),
+      dvGet("emails?$select=subject,createdon,_regardingobjectid_value"
+        + "&$expand=regardingobjectid_quote($select=quotenumber)"
+        + "&$filter="+encodeURIComponent("startswith(subject,'RFQ Completion Notification') and "+rng)),
+      dvGet("ssg_approvalhistories?$select=ssg_name,ssg_approvaltype,ssg_status,ssg_approvedrejectedon,_ssg_approver_value,createdon,modifiedon,_ssg_quote_value"
+        + "&$filter="+encodeURIComponent(rng)),
+      dvGet("msdyn_workorders?$select=msdyn_name,ssg_quotenumber,msdyn_systemstatus,createdon,_ssg_department_value"
+        + "&$filter="+encodeURIComponent("_ssg_division_value eq "+CANDOO_DIVISION+" and "+rng)),
+      dvGet("bookableresourcebookings?$select=ssg_bookingnumber,ssg_plannedstartdate,starttime,endtime,createdon,_msdyn_workorder_value"
+        + "&$expand=msdyn_workorder($select=ssg_quotenumber,_ssg_division_value)"
+        + "&$filter="+encodeURIComponent("msdyn_workorder/_ssg_division_value eq "+CANDOO_DIVISION+" and "+rng)),
+      fetch(PR_PROXY+'/pr?code='+PR_CODE).then(r=>r.ok?r.json():null).catch(()=>null)
+    ]);
+    const prRows = (prJson && prJson.rows ? prJson.rows : []).filter(r=>String(r.purchaseRequisition||'').toUpperCase().startsWith('CPR'));
 
-    // --- 2. RFQ Completion emails (Activity) ---
-    const emails = await dvGet("emails?$select=subject,createdon,_regardingobjectid_value"
-      + "&$expand=regardingobjectid_quote($select=quotenumber)"
-      + "&$filter="+encodeURIComponent("startswith(subject,'RFQ Completion Notification') and "+rng));
-
-    // --- 3. Approvals (ssg_approvalhistory) ---
-    const approvals = await dvGet("ssg_approvalhistories?$select=ssg_name,ssg_approvaltype,ssg_status,ssg_approvedrejectedon,_ssg_approver_value,createdon,modifiedon,_ssg_quote_value"
-      + "&$filter="+encodeURIComponent(rng));
-
-    // --- 4. Work Orders (Candoo division) + department ---
-    const wos = await dvGet("msdyn_workorders?$select=msdyn_name,ssg_quotenumber,msdyn_systemstatus,createdon,_ssg_department_value"
-      + "&$filter="+encodeURIComponent("_ssg_division_value eq "+CANDOO_DIVISION+" and "+rng));
-
-    // --- 5. Bookings (linked to Candoo work orders) ---
-    const bookings = await dvGet("bookableresourcebookings?$select=ssg_bookingnumber,ssg_plannedstartdate,starttime,endtime,createdon,_msdyn_workorder_value"
-      + "&$expand=msdyn_workorder($select=ssg_quotenumber,_ssg_division_value)"
-      + "&$filter="+encodeURIComponent("msdyn_workorder/_ssg_division_value eq "+CANDOO_DIVISION+" and "+rng));
-
-    // --- 6. PR (D365 F&O via proxy), filter CPR ---
-    let prRows = [];
-    try{
-      const pr = await fetch(PR_PROXY+'/pr?code='+PR_CODE).then(r=>r.ok?r.json():null);
-      prRows = (pr && pr.rows ? pr.rows : []).filter(r=>String(r.purchaseRequisition||'').toUpperCase().startsWith('CPR'));
-    }catch(e){ console.warn('PR proxy failed', e); }
-
-    // ---- index helper maps (by Quote No) ----
+    // ---- index maps ----
     const quoteByGuid = {}; quotes.forEach(q=>{ if(q.quoteid) quoteByGuid[q.quoteid.toLowerCase()] = q.quotenumber; });
 
     const emailByQ = {};
@@ -349,59 +336,52 @@ async function refreshAll(){
 
     const bookByQ = {};
     bookings.forEach(b=>{ const qn = b.msdyn_workorder && b.msdyn_workorder.ssg_quotenumber; if(!qn) return;
-      const a = bookByQ[qn] || (bookByQ[qn] = { plannedStart:null, endJob:null, bookingNo:b.ssg_bookingnumber });
+      const a = bookByQ[qn] || (bookByQ[qn] = { plannedStart:null, endJob:null });
       if(b.ssg_plannedstartdate && (a.plannedStart==null || new Date(b.ssg_plannedstartdate) < new Date(a.plannedStart))) a.plannedStart=b.ssg_plannedstartdate;
       if(b.endtime && (a.endJob==null || new Date(b.endtime) > new Date(a.endJob))) a.endJob=b.endtime; });
 
     const prByQ = {};
     prRows.forEach(p=>{ const qn = p.quotationReference; if(!qn) return; if(!prByQ[qn]) prByQ[qn] = p; });
 
-    // ---- build joined rows + compute pipeline stage durations ----
+    // ---- joined rows ----
     DATA = quotes.map(q=>{
       const qn = q.quotenumber;
+      const opp = q.opportunityid || {};
       const wo = woByQ[qn], bk = bookByQ[qn], pr = prByQ[qn], appr = apprByQ[qn] || [];
-      const oppCreated = q.opportunityid ? q.opportunityid.createdon : '';
+      const oppCreated = opp.createdon || '';
       const rfqEmail   = emailByQ[qn] || '';
       const prCreated  = pr ? pr.createdDate : '';
       const woCreated  = wo ? wo.createdon : '';
       const endJob     = bk ? bk.endJob : '';
-      const woDept     = wo ? (wo['_ssg_department_value'+F]||'') : '';
-      const prDept     = pr ? (pr.department||'') : '';
-      const internal   = apprSpan(appr,[2,5,10]); // Quote Approval + Markup Approval/Markup Range
-      const customer   = apprSpan(appr,[4]);      // Customer Approval
+      const internal   = apprSpan(appr,[2,5,10]);
+      const customer   = apprSpan(appr,[4]);
       const draftEnd   = prCreated || internal.start;
+      const dept = (opp.ssg_textdepartment||'').trim() || (wo?(wo['_ssg_department_value'+F]||''):'') || (pr?(pr.department||''):'') || '';
       return {
-        quoteNo: qn,
-        quoteId: q.quoteid,
-        createdDateTime: oppCreated,
+        quoteNo: qn, quoteId: q.quoteid, createdDateTime: oppCreated,
         drafting:  { val: dur(oppCreated, draftEnd), ms: durMs(oppCreated, draftEnd), a:oppCreated, b:draftEnd },
         rfq:       { val: dur(prCreated, rfqEmail),   ms: durMs(prCreated, rfqEmail), a:prCreated,  b:rfqEmail  },
-        internal,
-        customer,
+        internal, customer,
         workExec:  { val: dur(woCreated, endJob),     ms: durMs(woCreated, endJob),   a:woCreated,  b:endJob    },
         ageing:    ageDays(oppCreated),
         status:    q['statuscode'+F] || '',
-        dept:      woDept || prDept || '',
+        dept:      dept,
         _name: q.name||'', _prNo: pr?pr.purchaseRequisition:'', _prLoc: pr?(pr.location||pr.projectId):'',
-        _prDept: prDept, _woName: wo?wo.msdyn_name:'', _quoteCreated:q.createdon
+        _woName: wo?wo.msdyn_name:'', _quoteCreated:q.createdon
       };
     }).sort((a,b)=> new Date(b.createdDateTime||b._quoteCreated) - new Date(a.createdDateTime||a._quoteCreated));
 
     populateDepts();
-
     document.getElementById('kQuotes').textContent = DATA.length.toLocaleString();
     document.getElementById('kWO').textContent = Object.keys(woByQ).length.toLocaleString();
     document.getElementById('kRFQ').textContent = Object.keys(emailByQ).length.toLocaleString();
     document.getElementById('kAppr').textContent = approvals.length.toLocaleString();
     document.getElementById('kPR').textContent = prRows.length.toLocaleString();
 
-    render();
-    renderKpis();
-    const t = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-    setStatus('live · '+t, 'live');
+    render(); renderKpis();
+    setStatus('live · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}), 'live');
   }catch(e){
-    console.error(e); setStatus('error', 'err');
-    alert('Load failed: '+(e.message||e));
+    console.error(e); setStatus('error', 'err'); alert('Load failed: '+(e.message||e));
   }
 }
 
@@ -450,15 +430,15 @@ function render(){
     </tr>`).join('');
 }
 
-/* ============================ BUCKET KPIs (3-week, Resident-360 style) ============================ */
+/* ============================ BUCKET KPIs (count + average, 3-week) ============================ */
 const WK_MS = 7*864e5;
-const RFQ_SLA_MS = 24*36e5;   // 24-hour RFQ SLA
+const RFQ_SLA_MS = 24*36e5;
 function avg(a){ return a.length ? a.reduce((s,x)=>s+x,0)/a.length : null; }
 function metricMs(r,k){ if(k==='ageing') return r.ageing!=null ? r.ageing*864e5 : null; return r[k] ? r[k].ms : null; }
 function weekOf(r){ const t=ms(r.createdDateTime); if(t==null) return -1; const d=(Date.now()-t)/864e5; return d<0?0:Math.floor(d/7); }
 
 const TREND_METRICS=[
-  {k:'count',    label:'Quotes',            desc:'new quotes',          c:'#1F466B', icon:'📄', lowerBetter:false},
+  {k:'count',    label:'Quotes Created',    desc:'new quotes / week',   c:'#1F466B', icon:'📄', count:true},
   {k:'drafting', label:'Drafting',          desc:'created → PR raised', c:'#618FB4', icon:'✍️'},
   {k:'rfq',      label:'RFQ Process',       desc:'PR → RFQ completion', c:'#145A95', icon:'📨'},
   {k:'internal', label:'Internal Approval', desc:'Quote + Markup',      c:'#7E57C2', icon:'🛡️'},
@@ -467,42 +447,37 @@ const TREND_METRICS=[
   {k:'ageing',   label:'Total Ageing',      desc:'opp created → now',   c:'#C0392B', icon:'⏳'}
 ];
 
-function fmtVal(m,x){ return m.k==='count' ? (x==null?'0':x.toLocaleString()) : (x!=null?fmtDurMs(x):'—'); }
-function deltaHtml(m,cur,prev){
-  if(cur==null||prev==null) return '<span class="delta flat">●&nbsp;0</span>';
-  const diff = cur - prev;
-  if(diff===0) return '<span class="delta flat">●&nbsp;0</span>';
-  const lowerBetter = m.lowerBetter!==false;          // durations: lower=better; count: higher=better
-  const worse = lowerBetter ? diff>0 : diff<0;
-  const arrow = diff>0 ? '▲' : '▼';
-  const txt = m.k==='count' ? Math.abs(diff).toLocaleString() : fmtDurMs(Math.abs(diff));
-  return '<span class="delta '+(worse?'neg':'pos')+'">'+arrow+'&nbsp;'+txt+'</span>';
+function deltaCount(cur,prev){
+  if(prev==null) return '';
+  const diff=cur-prev; if(diff===0) return '<span class="delta flat">●0</span>';
+  return '<span class="delta '+(diff>0?'pos':'neg')+'">'+(diff>0?'▲':'▼')+Math.abs(diff)+'</span>';
 }
-function nTag(m,n){ return (m.k==='count'||!n) ? '' : '<span class="bn">n='+n+'</span>'; }
-
 function renderKpis(){
   const rows = activeRows();
-  const wk=[[],[],[]];                          // 3 rolling 7-day buckets by opportunity-created
+  const wk=[[],[],[]];
   rows.forEach(r=>{ const w=weekOf(r); if(w>=0&&w<3) wk[w].push(r); });
   const cards = TREND_METRICS.map(m=>{
-    const v=[null,null,null], n=[0,0,0];
+    const cnt=[0,0,0], av=[null,null,null];
     for(let w=0;w<3;w++){
-      if(m.k==='count'){ v[w]=wk[w].length; n[w]=wk[w].length; }
-      else { const vals=wk[w].map(r=>metricMs(r,m.k)).filter(x=>x!=null); v[w]=avg(vals); n[w]=vals.length; }
+      if(m.count){ cnt[w]=wk[w].length; }
+      else { const vals=wk[w].map(r=>metricMs(r,m.k)).filter(x=>x!=null); cnt[w]=vals.length; av[w]=avg(vals); }
     }
-    return bucketCard(m,v,n);
+    return bucketCard(m,cnt,av);
   }).join('');
   document.getElementById('trendKpis').innerHTML =
-    '<h3>3-Week Trend · bucketed by opportunity-created week</h3><div class="cardrow">'+cards+'</div>';
+    '<h3>3-Week Trend · bucketed by opportunity-created week (count &amp; avg time)</h3><div class="cardrow">'+cards+'</div>';
   renderProc(rows);
 }
-
-function bucketCard(m,v,n){
+function bucketCard(m,cnt,av){
+  const row=(lbl,i,isCur)=>{
+    const delta = i<2 ? deltaCount(cnt[i],cnt[i+1]) : '';
+    const avgTxt = m.count ? '' : (av[i]!=null ? '<span class="bavg">'+fmtDurMs(av[i])+' avg</span>' : '<span class="bavg none">— avg</span>');
+    return '<div class="brow'+(isCur?' cur':'')+'"><span class="blbl">'+lbl+'</span>'
+      + '<span class="bval'+(isCur?' big':'')+'"><b>'+cnt[i].toLocaleString()+'</b>'+delta+avgTxt+'</span></div>';
+  };
   return '<div class="bcard" style="--c:'+m.c+'">'
     + '<div class="bcard-head"><span class="bicon">'+m.icon+'</span><div><div class="btitle">'+m.label+'</div><div class="bdesc">'+m.desc+'</div></div></div>'
-    + '<div class="brow"><span class="blbl">Last Two Week</span><span class="bval">'+fmtVal(m,v[2])+' '+nTag(m,n[2])+'</span></div>'
-    + '<div class="brow"><span class="blbl">Last Week</span><span class="bval">'+fmtVal(m,v[1])+' '+deltaHtml(m,v[1],v[2])+'</span></div>'
-    + '<div class="brow cur"><span class="blbl">Current Week</span><span class="bval big">'+fmtVal(m,v[0])+' '+deltaHtml(m,v[0],v[1])+'</span></div>'
+    + row('Last Two Week',2,false) + row('Last Week',1,false) + row('Current Week',0,true)
     + '</div>';
 }
 
@@ -528,10 +503,7 @@ function renderProc(rows){
 
 /* ============================ BOOT ============================ */
 (async function(){
-  try{
-    await initMsal();
-    if(account){ await enterApp(); }
-  }catch(e){ /* show login */ }
+  try{ await initMsal(); if(account){ await enterApp(); } }catch(e){}
 })();
 </script>
 </body>
