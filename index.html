@@ -11,7 +11,7 @@
 <style>
   :root{
     --steel:#618FB4; --ocean:#145A95; --slate:#1F466B;
-    --bg:#F4F7FB; --card:#FFFFFF; --line:#E5E9F0;
+    --bg:#FAFCFE; --card:#FFFFFF; --line:#E5E9F0;
     --ink:#1F2937; --muted:#64748B; --good:#2E8B57; --warn:#E8A33D; --bad:#C0392B;
     --shadow:0 4px 14px rgba(31,70,107,.08); --shadow-lg:0 12px 32px rgba(31,70,107,.16);
   }
@@ -48,12 +48,12 @@
   .bcard{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:var(--shadow);min-width:210px;flex:1;display:flex;flex-direction:column;transition:.16s;}
   .bcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
   .bcard::before{content:'';display:block;height:4px;background:var(--c);}
-  .bcard-head{display:flex;align-items:center;gap:11px;padding:9px 16px 5px;}
+  .bcard-head{display:flex;align-items:center;gap:11px;padding:7px 16px 5px;}
   .bicon{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;background:color-mix(in srgb,var(--c) 13%,#fff);}
   .btitle{font-size:16px;font-weight:800;color:var(--c);letter-spacing:.2px;line-height:1.15;}
   .bdesc{font-size:10.5px;color:var(--muted);margin-top:2px;}
   .baccent{height:3px;width:44%;background:var(--c);border-radius:3px;margin:2px 0 2px 16px;}
-  .brow{display:flex;align-items:center;gap:6px;padding:9px 12px;border-top:1px solid #f1f4f9;cursor:pointer;transition:background .12s;}
+  .brow{display:flex;align-items:center;gap:6px;padding:10px 12px;border-top:1px solid #f1f4f9;cursor:pointer;transition:background .12s;}
   .brow:first-of-type{border-top:none;}
   .brow:hover{background:#f5f9fd;}
   .brow.cur:hover{background:linear-gradient(180deg,#e9f2fc,#dcebf8);}
@@ -67,16 +67,16 @@
   .brow.cur .bcol b{font-size:17px;color:var(--c);}
   .delta{display:inline-flex;align-items:center;gap:2px;font-size:10.5px;font-weight:800;white-space:nowrap;line-height:1.3;margin-top:1px;}
   .delta.pos{color:var(--good);} .delta.neg{color:var(--bad);} .delta.flat{color:#9aa7b5;}
-  .procHead{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#eef4fb,#f6f9fd);border:1px solid var(--line);border-left:5px solid var(--ocean);border-radius:10px;padding:4px 14px;margin-bottom:10px;}
+  .procHead{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#eef4fb,#f6f9fd);border:1px solid var(--line);border-left:5px solid var(--ocean);border-radius:10px;padding:2px 14px;margin-bottom:8px;}
   .procHead-ic{width:32px;height:32px;flex:0 0 32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:color-mix(in srgb,var(--ocean) 12%,#fff);}
   .procHead-t{font-size:14px;font-weight:800;color:var(--slate);letter-spacing:.5px;text-transform:uppercase;}
   .procHead-s{font-size:10px;font-weight:700;color:var(--steel);letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
   .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:0;min-width:220px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--tc,var(--ocean));display:flex;flex-direction:column;transition:.16s;overflow:hidden;cursor:pointer;}
   .tcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
-  .tcard-top{display:flex;align-items:center;gap:10px;padding:6px 15px 4px;}
+  .tcard-top{display:flex;align-items:center;gap:10px;padding:4px 15px 3px;}
   .tcard-ic{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
   .tcard .lbl{font-size:11.5px;color:var(--tc,var(--slate));text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
-  .tcard-body{padding:0 15px 7px;}
+  .tcard-body{padding:0 15px 5px;}
   .tcard-body.pend{display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .tcard-body.pend .pend-age{margin-top:0;}
   .tcard .big{font-size:24px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
@@ -85,7 +85,7 @@
   .pend-age{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 10px;border-radius:8px;background:rgba(192,57,43,.10);border:1px solid #e2a59e;font-size:11px;font-weight:700;color:#a4332a;text-transform:uppercase;letter-spacing:.4px;}
   .pend-age b{font-size:15px;font-weight:800;letter-spacing:-.2px;}
   .split-row{display:flex;border-top:1px solid var(--line);margin-top:2px;}
-  .split-row .seg{flex:1;text-align:center;padding:4px 6px 5px;}
+  .split-row .seg{flex:1;text-align:center;padding:3px 6px 3px;}
   .split-row .seg+.seg{border-left:1px solid var(--line);}
   .split-row .seg b{display:block;font-size:20px;font-weight:800;color:var(--tc,var(--ocean));line-height:1.1;letter-spacing:-.3px;}
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
@@ -158,7 +158,9 @@
   /* ===== drill-through modal ===== */
   .drill-modal{position:fixed;inset:0;z-index:2000;background:rgba(15,32,54,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;padding:30px;}
   .drill-modal.show{display:flex;}
-  .drill-box{background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);width:min(920px,94vw);max-height:86vh;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);}
+  .drill-box{background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);width:min(1180px,97vw);max-height:86vh;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);}
+  /* Topic column — capped width; long names are clipped (hover the cell to see the full name) */
+  .drill-topic{display:inline-block;max-width:230px;overflow:hidden;text-overflow:clip;white-space:nowrap;vertical-align:bottom;}
   .drill-head{display:flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(135deg,var(--slate),var(--ocean));color:#fff;}
   .drill-head b{font-size:15px;font-weight:800;}
   .drill-count{font-size:12px;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:2px 10px;}
@@ -374,6 +376,7 @@ function fmtDurMs(d){ if(d==null||isNaN(d)) return null; const neg=d<0; let x=Ma
   const day=Math.floor(x/864e5); x-=day*864e5; const hr=Math.floor(x/36e5); x-=hr*36e5; const mn=Math.floor(x/6e4);
   const s = day>0?(day+'d '+hr+'h') : (hr>0?(hr+'h '+mn+'m') : (mn+'m')); return (neg?'-':'')+s; }
 function durMs(a,b){ const s=ms(a), e=ms(b); if(s==null||e==null) return null; const d=e-s; return d<0?null:d; }
+function earliest(list){ let m=null; (list||[]).forEach(v=>{ const t=ms(v); if(t!=null && (m==null||t<m)) m=t; }); return m; }
 function dur(a,b){ const d=durMs(a,b); return d==null?null:fmtDurMs(d); }
 function ageDays(a){ const s=ms(a); if(s==null) return null; return Math.floor((Date.now()-s)/864e5); }
 function ageingMsOf(a){ const s=ms(a); return s==null ? null : (Date.now()-s); }
@@ -446,9 +449,18 @@ async function fetchAndJoin(fromISO, toISO){
     const endJob     = bk ? bk.endJob : '';
     const internal   = apprSpan(appr,[2,5,10]);
     const customer   = apprSpan(appr,[4]);
-    const draftEnd   = rfqEmail || internal.start || customer.start;
     const dept = (opp.ssg_textdepartment||'').trim() || (wo?(wo['_ssg_department_value'+F]||''):'') || (pr?(pr.department||''):'') || '';
     const quoteType = QUOTE_TYPE_FIELD ? (q[QUOTE_TYPE_FIELD+F] || q[QUOTE_TYPE_FIELD] || '') : '';
+    // Drafting ends when the quote first leaves drafting. Inspection quotes have no PR/RFQ/approval —
+    // they go straight to a Work Order, so drafting = opportunity → WO created. Everyone else: the
+    // earliest of PR raised, RFQ-completion email, internal/customer approval, or WO created.
+    let draftEnd;
+    if(/inspection/i.test(quoteType)){
+      draftEnd = woCreated || '';
+    } else {
+      const dEnd = earliest([prCreated, rfqEmail, internal.start, customer.start, woCreated]);
+      draftEnd = dEnd!=null ? new Date(dEnd).toISOString() : '';
+    }
     return {
       quoteNo: qn, quoteId: q.quoteid, createdDateTime: oppCreated, quoteType: quoteType,
       drafting:  { val: dur(oppCreated, draftEnd), ms: durMs(oppCreated, draftEnd), a:oppCreated, b:draftEnd },
@@ -633,7 +645,7 @@ function weekBoundaries(){
   return bounds;
 }
 function fmtRange(b){ const o={day:'2-digit',month:'short'}; return b.start.toLocaleDateString('en-GB',o)+'–'+b.end.toLocaleDateString('en-GB',o); }
-function weekOf(r,bounds){ const t=ms(r.createdDateTime); if(t==null) return -1;
+function weekOf(r,bounds){ const t=ms(r._quoteCreated||r.createdDateTime); if(t==null) return -1;
   for(let i=0;i<bounds.length;i++){ if(t>=bounds[i].start.getTime() && t<=bounds[i].end.getTime()) return i; } return -1; }
 
 const TREND_METRICS=[
@@ -762,8 +774,8 @@ function renderProc(){
     + '<div class="procHead-s">PR created → RFQ completion (6h benchmark)</div></div></div>'
     + '<div class="cardrow">'
     + single('#145A95','📄','Total RFQ', String(total), 'CPR PRs requiring RFQ', '', 'total')
-    + split('#2E8B57','✅','Completed &lt; 6h', under6, 'under6')
-    + split('#145A95','⏱️','Completed &gt; 6h', over6, 'over6')
+    + split('#2E8B57','✅','Completed (Less than 6 Hrs)', under6, 'under6')
+    + split('#145A95','⏱️','Completed (More than 6 Hrs)', over6, 'over6')
     + pendingCard
     + '</div>';
 }
@@ -790,7 +802,7 @@ function drillBucket(k, w){
   const rows = activeTrendRows().filter(r=> weekOf(r,wb)===w);
   const title = m.label+' · '+fmtRange(wb[w]);
   const qtype = r => r.quoteType ? tintTag(r.quoteType, quoteTypeColor(r.quoteType)) : '—';
-  const topic = r => escapeHtml(r._name||'—');
+  const topic = r => '<span class="drill-topic" title="'+escapeHtml(r._name||'')+'">'+escapeHtml(r._name||'—')+'</span>';
   if(k==='count'){
     const list = rows.slice().sort((a,b)=> (ms(b.createdDateTime)||0)-(ms(a.createdDateTime)||0));
     openDrill(title, ['Quote No','Topic','Quote Type','Created','Status'],
