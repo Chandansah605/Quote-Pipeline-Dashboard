@@ -17,8 +17,6 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Aptos','Gotham','Cairo','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);}
-  #loginOverlay{position:fixed;inset:0;z-index:50;background:linear-gradient(135deg,var(--slate) 0%,var(--ocean) 60%,var(--steel) 100%);display:flex;align-items:center;justify-content:center;}
-  #loginOverlay.hidden{display:none;}
   .login-card{background:#fff;border-radius:18px;padding:34px 38px;width:380px;text-align:center;box-shadow:var(--shadow-lg);}
   .login-card img{height:46px;margin-bottom:16px;}
   .login-card h1{font-size:19px;margin:4px 0 2px;color:var(--slate);font-weight:700;}
@@ -114,16 +112,83 @@
   .nowrap{white-space:nowrap;}
   .small{font-size:11px;}
   #emptyMsg{padding:40px;text-align:center;color:var(--muted);}
+  /* ===== Race-Control splash / login (ported from Resident 360) ===== */
+  .splash-overlay{position:fixed;inset:0;z-index:9999;overflow:hidden;
+    background:radial-gradient(ellipse at center, rgba(20,90,149,0.35) 0%, rgba(8,28,55,1) 60%),linear-gradient(135deg,#061629 0%,#0A2845 50%,#061629 100%);
+    display:flex;align-items:center;justify-content:center;transition:opacity .7s ease, transform .7s ease;}
+  .splash-overlay.hide{opacity:0;transform:scale(1.04);pointer-events:none;}
+  .splash-overlay::before{content:'';position:absolute;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle, transparent 0, transparent 18%, rgba(97,143,180,0.06) 18.5%, transparent 19%),radial-gradient(circle, transparent 0, transparent 32%, rgba(97,143,180,0.06) 32.5%, transparent 33%),radial-gradient(circle, transparent 0, transparent 46%, rgba(97,143,180,0.06) 46.5%, transparent 47%);pointer-events:none;}
+  .splash-overlay::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(97,143,180,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(97,143,180,0.04) 1px, transparent 1px);background-size:60px 60px;opacity:.6;}
+  .falling-line{position:absolute;top:-240px;width:1px;border-radius:1px;opacity:.7;animation:fallLine linear infinite;pointer-events:none;}
+  @keyframes fallLine{0%{transform:translateY(0);opacity:0;}10%{opacity:.9;}90%{opacity:.9;}100%{transform:translateY(110vh);opacity:0;}}
+  .splash-stack{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:24px;padding:30px;max-width:92vw;animation:splashRise .9s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes splashRise{0%{transform:translateY(28px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+  .strive-logo-card{background:#fff;padding:18px 32px;border-radius:20px;box-shadow:0 14px 36px rgba(0,0,0,0.45),0 2px 8px rgba(37,99,235,0.15);display:flex;flex-direction:column;align-items:center;gap:2px;min-width:240px;}
+  .strive-logo-card .strive-svg{width:80px;height:50px;display:block;}
+  .strive-logo-card .strive-word{font-family:'Aptos','Inter',sans-serif;color:#1F466B;font-weight:800;font-size:24px;letter-spacing:3px;margin-top:6px;}
+  .strive-logo-card .strive-group{font-size:9px;color:#618FB4;letter-spacing:4px;font-weight:700;margin-top:2px;}
+  .splash-card{background:linear-gradient(180deg, rgba(15,40,75,0.78) 0%, rgba(10,28,55,0.85) 100%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(97,143,180,0.22);border-radius:22px;padding:36px 48px;box-shadow:0 30px 70px rgba(0,0,0,0.55), inset 0 0 100px rgba(20,90,149,0.08);min-width:480px;max-width:540px;text-align:center;color:#E2E8F0;}
+  .splash-sub-tag{display:inline-block;color:#2DD4FF;font-size:10px;font-weight:600;letter-spacing:9px;padding-bottom:4px;}
+  .splash-title{color:#fff;font-size:32px;font-weight:700;margin:10px 0 12px;letter-spacing:.2px;line-height:1.15;font-family:'Aptos','Inter',sans-serif;}
+  .splash-blurb{color:#8FA3BD;font-size:13px;margin-bottom:4px;font-weight:400;}
+  .splash-divider{height:1px;width:90px;margin:18px auto 22px;background:linear-gradient(90deg, transparent, #E8A33D, transparent);}
+  .splash-signin{width:100%;padding:16px 24px;border-radius:14px;background:linear-gradient(135deg,#2563EB 0%,#3B82F6 50%,#1E40AF 100%);color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:16px;font-weight:800;letter-spacing:2px;box-shadow:0 10px 28px rgba(37,99,235,0.45), inset 0 -2px 6px rgba(0,0,0,0.18);transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;overflow:hidden;}
+  .splash-signin:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(37,99,235,0.6), inset 0 -2px 6px rgba(0,0,0,0.18);}
+  .splash-signin:active{transform:translateY(0);}
+  .splash-signin::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);transition:left .6s ease;}
+  .splash-signin:hover::after{left:150%;}
+  .splash-m365{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#CBD5E1;font-weight:500;}
+  .splash-m365-logo{display:inline-grid;grid-template-columns:1fr 1fr;gap:1px;width:14px;height:14px;}
+  .splash-m365-logo span{display:block;}
+  .splash-m365-logo span:nth-child(1){background:#F25022;} .splash-m365-logo span:nth-child(2){background:#7FBA00;}
+  .splash-m365-logo span:nth-child(3){background:#00A4EF;} .splash-m365-logo span:nth-child(4){background:#FFB900;}
+  .splash-secured{margin-top:6px;font-size:11px;color:#64748B;display:flex;align-items:center;justify-content:center;gap:5px;}
+  .splash-pills{margin-top:14px;display:flex;gap:8px;justify-content:center;}
+  .splash-pill{border:1px solid rgba(97,143,180,0.4);color:#94A3B8;padding:5px 12px;border-radius:14px;font-size:10px;font-weight:700;letter-spacing:1px;}
+  .splash-footer{position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#5B7088;font-size:12px;z-index:2;font-weight:400;}
+  .splash-footer .splash-tagline{color:#E8A33D;font-weight:700;letter-spacing:6px;margin-top:6px;font-size:12px;}
+  .splash-rev{position:absolute;top:18px;right:28px;color:#2C3F58;font-size:11px;letter-spacing:5px;z-index:2;}
 </style>
 </head>
 <body>
-<div id="loginOverlay">
-  <div class="login-card">
-    <img src="logo.png" alt="STRIVE" onerror="this.style.display='none'">
-    <h1>Quote Pipeline Ageing Dashboard</h1>
-    <p>Home Maintenance Services · Live from Dynamics 365 &amp; D365 F&amp;O</p>
-    <button class="btn" id="signinBtn" onclick="signIn()">Sign in with Microsoft</button>
-    <div id="loginErr"></div>
+<div class="splash-overlay" id="loginOverlay">
+  <div class="splash-rev">LIVE</div>
+  <div class="splash-stack">
+    <div class="strive-logo-card">
+      <svg class="strive-svg" viewBox="0 0 90 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="10,50 22,50 34,6 22,6"  fill="#1F466B"/>
+        <polygon points="34,50 46,50 58,6 46,6"  fill="#2563EB"/>
+        <polygon points="58,50 70,50 82,6 70,6"  fill="#7DD3FC"/>
+      </svg>
+      <div class="strive-word">STRIVE</div>
+      <div class="strive-group">SERVICES&nbsp;&nbsp;GROUP</div>
+    </div>
+    <div class="splash-card">
+      <div class="splash-sub-tag">PROCUREMENT</div>
+      <h1 class="splash-title">Quote Pipeline Ageing Dashboard</h1>
+      <div class="splash-blurb">Home Maintenance Services · Secure access for authorised personnel</div>
+      <div class="splash-divider"></div>
+      <button class="splash-signin" id="signinBtn" onclick="signIn()">
+        <span>➜</span> SIGN IN
+      </button>
+      <div id="loginErr" style="color:#ffd2d2;font-size:12px;margin-top:10px;min-height:14px;"></div>
+      <div class="splash-m365">
+        <span class="splash-m365-logo"><span></span><span></span><span></span><span></span></span>
+        via Microsoft 365
+      </div>
+      <div class="splash-secured">🛡 Secured by Azure Active Directory</div>
+      <div class="splash-pills">
+        <span class="splash-pill">AZURE AD</span>
+        <span class="splash-pill">ENCRYPTED</span>
+        <span class="splash-pill">SSO</span>
+      </div>
+    </div>
+  </div>
+  <div class="splash-footer">
+    Home Maintenance Services · Strive Services Group
+    <div class="splash-tagline">FOR&nbsp;&nbsp;EXCELLENCE&nbsp;&nbsp;WE&nbsp;&nbsp;STRIVE</div>
   </div>
 </div>
 <header>
@@ -246,7 +311,7 @@ function setDefaultDates(){
 }
 
 async function enterApp(){
-  document.getElementById('loginOverlay').classList.add('hidden');
+  dismissSplash();
   ['controls','trendKpis','procKpis','wrap'].forEach(id=>document.getElementById(id).style.display='');
   ['refreshBtn','signoutBtn'].forEach(id=>document.getElementById(id).style.display='');
   const up=document.getElementById('userPill'); up.style.display=''; up.textContent = account.name || account.username || 'Signed in';
@@ -637,6 +702,39 @@ function renderProc(){
     + '</div>';
 }
 
+/* ---- Race-Control splash: falling rain lines + dismiss ---- */
+function initSplash(){
+  const overlay=document.getElementById('loginOverlay'); if(!overlay) return;
+  document.body.style.overflow='hidden';
+  const colors=[
+    'linear-gradient(transparent, #E8A33D 50%, transparent)',
+    'linear-gradient(transparent, #618FB4 50%, transparent)',
+    'linear-gradient(transparent, #2DD4FF 50%, transparent)',
+    'linear-gradient(transparent, #2563EB 50%, transparent)',
+    'linear-gradient(transparent, rgba(232,163,61,0.45) 50%, transparent)'
+  ];
+  const frag=document.createDocumentFragment();
+  for(let i=0;i<80;i++){
+    const line=document.createElement('div'); line.className='falling-line';
+    line.style.left=(Math.random()*100)+'vw';
+    line.style.height=(50+Math.random()*250)+'px';
+    line.style.background=colors[Math.floor(Math.random()*colors.length)];
+    line.style.animationDuration=(3+Math.random()*5)+'s';
+    line.style.animationDelay=(Math.random()*6)+'s';
+    line.style.opacity=(0.35+Math.random()*0.5).toFixed(2);
+    line.style.width='1px';
+    frag.appendChild(line);
+  }
+  overlay.appendChild(frag);
+}
+function dismissSplash(){
+  const overlay=document.getElementById('loginOverlay'); if(!overlay) return;
+  overlay.classList.add('hide'); document.body.style.overflow='';
+  setTimeout(()=>{ if(overlay && overlay.parentNode) overlay.remove(); }, 800);
+}
+
+/* ============================ BOOT ============================ */
+initSplash();
 (async function(){
   try{ await initMsal(); if(account){ await enterApp(); } }catch(e){}
 })();
