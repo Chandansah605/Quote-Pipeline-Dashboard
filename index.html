@@ -53,8 +53,10 @@
   .btitle{font-size:16px;font-weight:800;color:var(--c);letter-spacing:.2px;line-height:1.15;}
   .bdesc{font-size:10.5px;color:var(--muted);margin-top:2px;}
   .baccent{height:3px;width:44%;background:var(--c);border-radius:3px;margin:2px 0 2px 16px;}
-  .brow{display:flex;align-items:center;gap:6px;padding:7px 12px;border-top:1px solid #f1f4f9;}
+  .brow{display:flex;align-items:center;gap:6px;padding:8px 12px;border-top:1px solid #f1f4f9;cursor:pointer;transition:background .12s;}
   .brow:first-of-type{border-top:none;}
+  .brow:hover{background:#f5f9fd;}
+  .brow.cur:hover{background:linear-gradient(180deg,#e9f2fc,#dcebf8);}
   .brow .blbl{font-size:11.5px;color:var(--ink);font-weight:700;white-space:nowrap;flex:1;min-width:0;}
   .bcol{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;width:40px;flex:0 0 40px;}
   .bcol.avg{width:72px;flex:0 0 72px;}
@@ -69,19 +71,21 @@
   .procHead-ic{width:32px;height:32px;flex:0 0 32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:color-mix(in srgb,var(--ocean) 12%,#fff);}
   .procHead-t{font-size:14px;font-weight:800;color:var(--slate);letter-spacing:.5px;text-transform:uppercase;}
   .procHead-s{font-size:10px;font-weight:700;color:var(--steel);letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
-  .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:0;min-width:220px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--tc,var(--ocean));display:flex;flex-direction:column;transition:.16s;overflow:hidden;}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:0;min-width:220px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--tc,var(--ocean));display:flex;flex-direction:column;transition:.16s;overflow:hidden;cursor:pointer;}
   .tcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
-  .tcard-top{display:flex;align-items:center;gap:10px;padding:10px 15px 7px;}
-  .tcard-ic{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
+  .tcard-top{display:flex;align-items:center;gap:10px;padding:8px 15px 5px;}
+  .tcard-ic{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
   .tcard .lbl{font-size:11.5px;color:var(--tc,var(--slate));text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
-  .tcard-body{padding:0 15px 11px;}
-  .tcard .big{font-size:27px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
+  .tcard-body{padding:0 15px 9px;}
+  .tcard-body.pend{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .tcard-body.pend .pend-age{margin-top:0;}
+  .tcard .big{font-size:24px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
   .tcard .mini{font-size:10.5px;color:var(--muted);margin-top:4px;}
   .big.good{color:var(--good);} .big.bad{color:var(--bad);}
   .pend-age{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 10px;border-radius:8px;background:rgba(192,57,43,.10);border:1px solid #e2a59e;font-size:11px;font-weight:700;color:#a4332a;text-transform:uppercase;letter-spacing:.4px;}
   .pend-age b{font-size:15px;font-weight:800;letter-spacing:-.2px;}
   .split-row{display:flex;border-top:1px solid var(--line);margin-top:2px;}
-  .split-row .seg{flex:1;text-align:center;padding:8px 6px 9px;}
+  .split-row .seg{flex:1;text-align:center;padding:6px 6px 7px;}
   .split-row .seg+.seg{border-left:1px solid var(--line);}
   .split-row .seg b{display:block;font-size:20px;font-weight:800;color:var(--tc,var(--ocean));line-height:1.1;letter-spacing:-.3px;}
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
@@ -90,8 +94,8 @@
   thead tr.countrow th{position:sticky;top:0;z-index:3;background:#EAF1F9;color:var(--slate);text-align:left;padding:4px 12px;white-space:nowrap;font-weight:800;font-size:11px;border-right:1px solid #dbe6f2;border-bottom:1px solid #cfe0f0;}
   thead tr.countrow th .cnum{font-size:12.5px;font-weight:800;color:var(--ocean);}
   thead tr.countrow th .clbl{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
-  thead tr.headrow th{position:sticky;top:26px;z-index:2;background:var(--ocean);color:#fff;text-align:left;vertical-align:middle;padding:8px 12px;white-space:nowrap;font-weight:700;border-right:1px solid rgba(255,255,255,.14);}
-  thead tr.headrow th .small.muted{color:rgba(255,255,255,.72);}
+  thead tr.headrow th{position:sticky;top:26px;z-index:2;background:var(--ocean);color:#fff;text-align:left;vertical-align:top;padding:9px 12px;white-space:nowrap;font-weight:700;border-right:1px solid rgba(255,255,255,.14);line-height:1.35;}
+  thead tr.headrow th .small.muted{color:rgba(255,255,255,.72);font-weight:500;}
   thead tr.headrow th .thi{margin-right:6px;}
   tbody td{padding:5px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);vertical-align:middle;}
   tbody tr:nth-child(even){background:#FAFBFD;}
@@ -151,6 +155,25 @@
   .splash-footer{position:absolute;bottom:28px;left:0;right:0;text-align:center;color:#5B7088;font-size:12px;z-index:2;font-weight:400;}
   .splash-footer .splash-tagline{color:#E8A33D;font-weight:700;letter-spacing:6px;margin-top:6px;font-size:12px;}
   .splash-rev{position:absolute;top:18px;right:28px;color:#2C3F58;font-size:11px;letter-spacing:5px;z-index:2;}
+  /* ===== drill-through modal ===== */
+  .drill-modal{position:fixed;inset:0;z-index:2000;background:rgba(15,32,54,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;padding:30px;}
+  .drill-modal.show{display:flex;}
+  .drill-box{background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);width:min(920px,94vw);max-height:86vh;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);}
+  .drill-head{display:flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(135deg,var(--slate),var(--ocean));color:#fff;}
+  .drill-head b{font-size:15px;font-weight:800;}
+  .drill-count{font-size:12px;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:2px 10px;}
+  .drill-x{margin-left:auto;cursor:pointer;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;width:30px;height:30px;font-size:15px;line-height:1;}
+  .drill-x:hover{background:rgba(255,255,255,.28);}
+  .drill-scroll{overflow:auto;padding:0;}
+  table.drill-tbl{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px;}
+  table.drill-tbl thead th{position:sticky;top:0;background:#EAF1F9;color:var(--slate);text-align:left;padding:8px 14px;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #cfe0f0;white-space:nowrap;}
+  table.drill-tbl tbody td{padding:7px 14px;border-bottom:1px solid var(--line);white-space:nowrap;}
+  table.drill-tbl tbody tr:nth-child(even){background:#FAFBFD;}
+  table.drill-tbl tbody tr:hover{background:#EEF4FB;}
+  .drill-q{font-weight:700;color:var(--ocean);text-decoration:none;border-bottom:1px dotted var(--steel);}
+  .drill-q:hover{color:var(--slate);}
+  .drill-ongoing{color:#B8860B;font-style:italic;}
+  .drill-empty{padding:34px;text-align:center;color:var(--muted);}
 </style>
 </head>
 <body>
@@ -236,6 +259,14 @@
     <tbody id="tbody"></tbody>
   </table>
   <div id="emptyMsg" style="display:none">No quotes found for the selected range.</div>
+</div>
+
+<!-- drill-through modal -->
+<div class="drill-modal" id="drillModal" onclick="if(event.target===this)closeDrill()">
+  <div class="drill-box">
+    <div class="drill-head"><b id="drillTitle"></b><span class="drill-count" id="drillCount"></span><button class="drill-x" onclick="closeDrill()">✕</button></div>
+    <div class="drill-scroll"><table class="drill-tbl" id="drillTable"></table><div id="drillEmpty" class="drill-empty" style="display:none">No records.</div></div>
+  </div>
 </div>
 <script>
 const CRM_ORG    = 'https://operations-ifahr-live.crm15.dynamics.com';
@@ -571,6 +602,18 @@ function renderCountRow(rows){
 const RFQ_THRESHOLD_MS = 6*36e5;
 function avg(a){ return a.length ? a.reduce((s,x)=>s+x,0)/a.length : null; }
 function metricMs(r,k){ if(k==='ageing') return r.ageingMs!=null ? r.ageingMs : null; return r[k] ? r[k].ms : null; }
+// A quote "hits" a stage the moment it has a START date for it. If there is no END yet,
+// the stage is still running, so we measure to NOW (ongoing) instead of dropping the record.
+function stageSpan(r,k){
+  if(k==='ageing')   return {start: ms(r.createdDateTime), end: null};
+  if(k==='internal') return {start: ms(r.internal&&r.internal.start), end: ms(r.internal&&r.internal.end)};
+  if(k==='customer') return {start: ms(r.customer&&r.customer.start), end: ms(r.customer&&r.customer.end)};
+  const o = r[k]; return {start: ms(o&&o.a), end: ms(o&&o.b)};   // drafting / rfq / workExec use {a,b}
+}
+function stageHitMs(r,k){
+  const s = stageSpan(r,k); if(s.start==null) return null;
+  return (s.end!=null ? s.end : Date.now()) - s.start;   // ongoing → to now
+}
 function mondayOf(d){ const dt=new Date(d); const day=(dt.getDay()+6)%7; dt.setHours(0,0,0,0); dt.setDate(dt.getDate()-day); return dt; }
 function weekBoundaries(){
   const curMon = mondayOf(new Date()); const bounds=[];
@@ -611,7 +654,7 @@ function renderKpis(){
     const cnt=[0,0,0], av=[null,null,null];
     for(let w=0;w<3;w++){
       if(m.count){ cnt[w]=wk[w].length; }
-      else { const vals=wk[w].map(r=>metricMs(r,m.k)).filter(x=>x!=null); cnt[w]=vals.length; av[w]=avg(vals); }
+      else { const vals=wk[w].map(r=>stageHitMs(r,m.k)).filter(x=>x!=null); cnt[w]=vals.length; av[w]=avg(vals); }
     }
     return bucketCard(m,cnt,av,wb);
   }).join('');
@@ -634,7 +677,7 @@ function bucketCard(m,cnt,av,wb){
       const avgDelta = i<2 ? deltaDur(av[i],av[i+1]) : '';
       avgBlock = '<span class="bdivider"></span><span class="bcol avg"><b>'+(av[i]!=null?fmtDurMs(av[i]):'—')+'</b>'+avgDelta+'</span>';
     }
-    return '<div class="brow'+(isCur?' cur':'')+'" title="'+escapeHtml(fmtRange(wb[i]))+'">'
+    return '<div class="brow'+(isCur?' cur':'')+'" title="'+escapeHtml(fmtRange(wb[i]))+' · click to drill through" onclick="drillBucket(\''+m.k+'\','+i+')">'
       + '<span class="blbl">'+meta.lbl+'</span>' + cntCol + avgBlock + '</div>';
   };
   return '<div class="bcard" style="--c:'+m.c+'">'
@@ -644,27 +687,32 @@ function bucketCard(m,cnt,av,wb){
     + '</div>';
 }
 
-function renderProc(){
+// CPR PRs for the current FROM/TO date range + dept filter (dept matched via the quote, like the table)
+function currentPRs(){
   const dept = document.getElementById('deptSel').value;
   const fromEl=document.getElementById('fromDate'), toEl=document.getElementById('toDate');
   const fromMs = (fromEl && fromEl.value) ? new Date(fromEl.value+'T00:00:00').getTime() : null;
   const toMs   = (toEl && toEl.value)   ? new Date(toEl.value  +'T23:59:59').getTime() : null;
-  // Map each quote to its dashboard department (same field the dropdown uses) so dept filtering
-  // is consistent with the table — the PR's own department string often differs / is blank.
   const deptByQuote = {};
   DATA.concat(TREND_DATA).forEach(r=>{ if(r.quoteNo && r.dept) deptByQuote[r.quoteNo]=r.dept; });
-  let prs = PR_ROWS.slice();
-  prs = prs.filter(p=>{ const t=ms(p.createdDate); if(t==null) return false;
+  let prs = PR_ROWS.filter(p=>{ const t=ms(p.createdDate); if(t==null) return false;
     if(fromMs!=null && t<fromMs) return false; if(toMs!=null && t>toMs) return false; return true; });
   if(dept){ prs = prs.filter(p=> deptByQuote[p.quotationReference]===dept || (p.department||'')===dept ); }
+  return prs;
+}
+// classify each CPR PR (shared by the cards and the drill-through)
+function rfqRecs(){
   const now = Date.now();
-  const recs = prs.map(p=>{
+  return currentPRs().map(p=>{
     const qn = p.quotationReference;
     const emailT = qn ? EMAIL_BY_Q[qn] : null;
     const rfqMs  = emailT ? durMs(p.createdDate, emailT) : null;
     const waitMs = p.createdDate ? Math.max(0, now - ms(p.createdDate)) : null;
-    return { rfqMs, waitMs, done: rfqMs!=null };
+    return { p, qn, emailT, rfqMs, waitMs, done: rfqMs!=null };
   });
+}
+function renderProc(){
+  const recs = rfqRecs();
   const done    = recs.filter(r=>r.done);
   const pending = recs.filter(r=>!r.done);
   const under6  = done.filter(r=> r.rfqMs<=RFQ_THRESHOLD_MS);
@@ -673,14 +721,14 @@ function renderProc(){
   const pct     = n => total ? Math.round(n/total*100) : 0;
   const pendAvg = avg(pending.map(r=>r.waitMs).filter(x=>x!=null));
 
-  const single=(color,ic,lbl,big,sub,cls)=>
-    '<div class="tcard" style="--tc:'+color+'">'
+  const single=(color,ic,lbl,big,sub,cls,cat)=>
+    '<div class="tcard" style="--tc:'+color+'" title="click to drill through" onclick="drillRfq(\''+cat+'\')">'
     + '<div class="tcard-top"><span class="tcard-ic">'+ic+'</span><span class="lbl">'+lbl+'</span></div>'
     + '<div class="tcard-body"><div class="big '+(cls||'')+'">'+big+'</div>'+(sub?'<div class="mini">'+sub+'</div>':'')+'</div>'
     + '</div>';
-  const split=(color,ic,title,list)=>{
+  const split=(color,ic,title,list,cat)=>{
     const avgMs = avg(list.map(r=>r.rfqMs));
-    return '<div class="tcard" style="--tc:'+color+'">'
+    return '<div class="tcard" style="--tc:'+color+'" title="click to drill through" onclick="drillRfq(\''+cat+'\')">'
       + '<div class="tcard-top"><span class="tcard-ic">'+ic+'</span><span class="lbl">'+title+'</span></div>'
       + '<div class="split-row">'
       + '<div class="seg"><b>'+list.length+'</b><span class="seglbl">👥 Count</span></div>'
@@ -689,10 +737,11 @@ function renderProc(){
       + '</div></div>';
   };
   const pendingCard =
-    '<div class="tcard" style="--tc:#C0392B">'
+    '<div class="tcard" style="--tc:#C0392B" title="click to drill through" onclick="drillRfq(\'pending\')">'
     + '<div class="tcard-top"><span class="tcard-ic">✉️</span><span class="lbl">Pending RFQ</span></div>'
-    + '<div class="tcard-body"><div class="big '+(pending.length>0?'bad':'good')+'">'+pending.length+'</div>'
-    + '<div class="mini">PR raised, RFQ email not found</div>'
+    + '<div class="tcard-body pend">'
+    + '<div><div class="big '+(pending.length>0?'bad':'good')+'">'+pending.length+'</div>'
+    + '<div class="mini">PR raised, RFQ email not found</div></div>'
     + '<div class="pend-age">⏳ Avg ageing <b>'+(pendAvg!=null?fmtDurMs(pendAvg):'—')+'</b></div>'
     + '</div></div>';
 
@@ -701,11 +750,59 @@ function renderProc(){
     + '<div><div class="procHead-t">Procurement · RFQ Performance</div>'
     + '<div class="procHead-s">PR created → RFQ completion (6h benchmark)</div></div></div>'
     + '<div class="cardrow">'
-    + single('#145A95','📄','Total RFQ', String(total), 'CPR PRs requiring RFQ')
-    + split('#2E8B57','✅','Completed &lt; 6h', under6)
-    + split('#145A95','⏱️','Completed &gt; 6h', over6)
+    + single('#145A95','📄','Total RFQ', String(total), 'CPR PRs requiring RFQ', '', 'total')
+    + split('#2E8B57','✅','Completed &lt; 6h', under6, 'under6')
+    + split('#145A95','⏱️','Completed &gt; 6h', over6, 'over6')
     + pendingCard
     + '</div>';
+}
+
+/* ============================ DRILL-THROUGH ============================ */
+function quoteIdOf(qn){ const r = DATA.find(x=>x.quoteNo===qn) || TREND_DATA.find(x=>x.quoteNo===qn); return r?r.quoteId:null; }
+function qlink(r){ return r.quoteId ? '<a class="drill-q" href="'+quoteUrl(r.quoteId)+'" target="_blank" rel="noopener">'+escapeHtml(r.quoteNo)+'</a>' : escapeHtml(r.quoteNo); }
+function qlinkNo(qn){ const id=quoteIdOf(qn); return id ? '<a class="drill-q" href="'+quoteUrl(id)+'" target="_blank" rel="noopener">'+escapeHtml(qn)+'</a>' : escapeHtml(qn||'—'); }
+function closeDrill(){ document.getElementById('drillModal').classList.remove('show'); }
+function openDrill(title, cols, rows){
+  document.getElementById('drillTitle').textContent = title;
+  document.getElementById('drillCount').textContent = rows.length + (rows.length===1?' record':' records');
+  const tbl = document.getElementById('drillTable'), empty = document.getElementById('drillEmpty');
+  if(!rows.length){ tbl.innerHTML=''; empty.style.display=''; }
+  else{ empty.style.display='none';
+    tbl.innerHTML = '<thead><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'
+      + rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('') + '</tbody>'; }
+  document.getElementById('drillModal').classList.add('show');
+}
+// Drill a trend bucket for a given week: lists every quote that HIT that stage, with its timing.
+function drillBucket(k, w){
+  const wb = WEEK_BOUNDS.length ? WEEK_BOUNDS : weekBoundaries();
+  const m = TREND_METRICS.find(x=>x.k===k) || {label:k};
+  const rows = activeTrendRows().filter(r=> weekOf(r,wb)===w);
+  const title = m.label+' · '+fmtRange(wb[w]);
+  if(k==='count'){
+    const list = rows.slice().sort((a,b)=> (ms(b.createdDateTime)||0)-(ms(a.createdDateTime)||0));
+    openDrill(title, ['Quote No','Created','Status'],
+      list.map(r=>[ qlink(r), fmt(r.createdDateTime)||'—', r.status?tintTag(r.status,statusColor(r.status)):'—' ]));
+    return;
+  }
+  const list = rows.map(r=>({r, s:stageSpan(r,k), hit:stageHitMs(r,k)})).filter(x=>x.hit!=null)
+    .sort((a,b)=> b.hit-a.hit);
+  openDrill(title, ['Quote No','Start','End','Duration'],
+    list.map(x=>[ qlink(x.r), fmt(x.s.start)||'—',
+      x.s.end!=null ? fmt(x.s.end) : '<span class="drill-ongoing">ongoing · now</span>',
+      '<b>'+fmtDurMs(x.hit)+'</b>' ]));
+}
+// Drill an RFQ-performance card: lists the CPR PRs in that category with their RFQ timing.
+function drillRfq(cat){
+  const recs = rfqRecs();
+  let list = recs, label = 'Total RFQ';
+  if(cat==='under6'){ list = recs.filter(r=>r.done && r.rfqMs<=RFQ_THRESHOLD_MS); label='Completed < 6h'; }
+  else if(cat==='over6'){ list = recs.filter(r=>r.done && r.rfqMs>RFQ_THRESHOLD_MS); label='Completed > 6h'; }
+  else if(cat==='pending'){ list = recs.filter(r=>!r.done); label='Pending RFQ'; }
+  list = list.slice().sort((a,b)=> ((b.done?b.rfqMs:b.waitMs)||0) - ((a.done?a.rfqMs:a.waitMs)||0));
+  openDrill(label+' — PR created → RFQ completion', ['PR No','Quote No','PR Created','RFQ Email','Time'],
+    list.map(x=>[ escapeHtml(x.p.purchaseRequisition||'—'), qlinkNo(x.qn), fmt(x.p.createdDate)||'—',
+      x.done ? fmt(x.emailT) : '<span class="drill-ongoing">not received</span>',
+      '<b>'+(x.done ? fmtDurMs(x.rfqMs) : (x.waitMs!=null?fmtDurMs(x.waitMs):'—'))+'</b>' ]));
 }
 
 /* ---- Race-Control splash: falling rain lines + dismiss ---- */
