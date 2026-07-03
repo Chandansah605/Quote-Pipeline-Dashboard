@@ -48,12 +48,12 @@
   .bcard{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:var(--shadow);min-width:210px;flex:1;display:flex;flex-direction:column;transition:.16s;}
   .bcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
   .bcard::before{content:'';display:block;height:4px;background:var(--c);}
-  .bcard-head{display:flex;align-items:center;gap:11px;padding:10px 16px 6px;}
+  .bcard-head{display:flex;align-items:center;gap:11px;padding:9px 16px 5px;}
   .bicon{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;background:color-mix(in srgb,var(--c) 13%,#fff);}
   .btitle{font-size:16px;font-weight:800;color:var(--c);letter-spacing:.2px;line-height:1.15;}
   .bdesc{font-size:10.5px;color:var(--muted);margin-top:2px;}
   .baccent{height:3px;width:44%;background:var(--c);border-radius:3px;margin:2px 0 2px 16px;}
-  .brow{display:flex;align-items:center;gap:6px;padding:8px 12px;border-top:1px solid #f1f4f9;cursor:pointer;transition:background .12s;}
+  .brow{display:flex;align-items:center;gap:6px;padding:9px 12px;border-top:1px solid #f1f4f9;cursor:pointer;transition:background .12s;}
   .brow:first-of-type{border-top:none;}
   .brow:hover{background:#f5f9fd;}
   .brow.cur:hover{background:linear-gradient(180deg,#e9f2fc,#dcebf8);}
@@ -62,21 +62,21 @@
   .bcol.avg{width:72px;flex:0 0 72px;}
   .bcol b{font-size:15px;font-weight:800;color:var(--slate);line-height:1.15;letter-spacing:-.3px;white-space:nowrap;}
   .bdivider{width:1px;align-self:stretch;background:#EEF2F7;margin:4px 6px;}
-  .brow.cur{background:linear-gradient(180deg,#f2f7fc,#eaf2fb);}
+  .brow.cur{background:linear-gradient(180deg,#f9fcff,#f1f7fd);}
   .brow.cur .blbl{color:var(--c);}
   .brow.cur .bcol b{font-size:17px;color:var(--c);}
   .delta{display:inline-flex;align-items:center;gap:2px;font-size:10.5px;font-weight:800;white-space:nowrap;line-height:1.3;margin-top:1px;}
   .delta.pos{color:var(--good);} .delta.neg{color:var(--bad);} .delta.flat{color:#9aa7b5;}
-  .procHead{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#eef4fb,#f6f9fd);border:1px solid var(--line);border-left:5px solid var(--ocean);border-radius:10px;padding:7px 14px;margin-bottom:12px;}
+  .procHead{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#eef4fb,#f6f9fd);border:1px solid var(--line);border-left:5px solid var(--ocean);border-radius:10px;padding:4px 14px;margin-bottom:10px;}
   .procHead-ic{width:32px;height:32px;flex:0 0 32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:color-mix(in srgb,var(--ocean) 12%,#fff);}
   .procHead-t{font-size:14px;font-weight:800;color:var(--slate);letter-spacing:.5px;text-transform:uppercase;}
   .procHead-s{font-size:10px;font-weight:700;color:var(--steel);letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
   .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:0;min-width:220px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--tc,var(--ocean));display:flex;flex-direction:column;transition:.16s;overflow:hidden;cursor:pointer;}
   .tcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
-  .tcard-top{display:flex;align-items:center;gap:10px;padding:8px 15px 5px;}
+  .tcard-top{display:flex;align-items:center;gap:10px;padding:6px 15px 4px;}
   .tcard-ic{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
   .tcard .lbl{font-size:11.5px;color:var(--tc,var(--slate));text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
-  .tcard-body{padding:0 15px 9px;}
+  .tcard-body{padding:0 15px 7px;}
   .tcard-body.pend{display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .tcard-body.pend .pend-age{margin-top:0;}
   .tcard .big{font-size:24px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
@@ -85,7 +85,7 @@
   .pend-age{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 10px;border-radius:8px;background:rgba(192,57,43,.10);border:1px solid #e2a59e;font-size:11px;font-weight:700;color:#a4332a;text-transform:uppercase;letter-spacing:.4px;}
   .pend-age b{font-size:15px;font-weight:800;letter-spacing:-.2px;}
   .split-row{display:flex;border-top:1px solid var(--line);margin-top:2px;}
-  .split-row .seg{flex:1;text-align:center;padding:6px 6px 7px;}
+  .split-row .seg{flex:1;text-align:center;padding:4px 6px 5px;}
   .split-row .seg+.seg{border-left:1px solid var(--line);}
   .split-row .seg b{display:block;font-size:20px;font-weight:800;color:var(--tc,var(--ocean));line-height:1.1;letter-spacing:-.3px;}
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
@@ -593,10 +593,21 @@ function renderCountRow(rows){
     st:   rows.filter(r=>r.status).length
   };
   const cell = (v,lbl)=>'<th><span class="cnum">'+v+'</span> <span class="clbl">'+lbl+'</span></th>';
+  const blank = '<th></th>';
+  const pre  = rows.filter(r=>/predefined/i.test(r.quoteType||'')).length;
+  const insp = rows.filter(r=>/inspection/i.test(r.quoteType||'')).length;
+  const typeCell = '<th><span class="cnum">'+pre+'</span><span class="clbl"> pre</span> · <span class="cnum">'+insp+'</span><span class="clbl"> insp</span></th>';
   document.getElementById('countRow').innerHTML =
-      cell(n,'quotes') + cell(c.cr,'dated') + cell(c.qt,'typed') + cell(c.dr,'drafted')
-    + cell(c.rfq,'rfq') + cell(c.ia,'internal') + cell(c.ca,'customer') + cell(c.we,'executed')
-    + cell(c.ag,'ageing') + cell(c.st,'status');
+      cell(n,'quotes')      /* Quote No */
+    + blank                 /* Created Date */
+    + typeCell              /* Quote Type */
+    + cell(c.dr,'drafted')  /* Drafting */
+    + cell(c.rfq,'rfq')     /* RFQ Process */
+    + cell(c.ia,'internal') /* Internal Approval */
+    + cell(c.ca,'customer') /* Customer Approval */
+    + cell(c.we,'executed') /* Work Execution */
+    + blank                 /* Total Ageing */
+    + blank;                /* Status */
 }
 
 const RFQ_THRESHOLD_MS = 6*36e5;
@@ -778,16 +789,18 @@ function drillBucket(k, w){
   const m = TREND_METRICS.find(x=>x.k===k) || {label:k};
   const rows = activeTrendRows().filter(r=> weekOf(r,wb)===w);
   const title = m.label+' · '+fmtRange(wb[w]);
+  const qtype = r => r.quoteType ? tintTag(r.quoteType, quoteTypeColor(r.quoteType)) : '—';
+  const topic = r => escapeHtml(r._name||'—');
   if(k==='count'){
     const list = rows.slice().sort((a,b)=> (ms(b.createdDateTime)||0)-(ms(a.createdDateTime)||0));
-    openDrill(title, ['Quote No','Created','Status'],
-      list.map(r=>[ qlink(r), fmt(r.createdDateTime)||'—', r.status?tintTag(r.status,statusColor(r.status)):'—' ]));
+    openDrill(title, ['Quote No','Topic','Quote Type','Created','Status'],
+      list.map(r=>[ qlink(r), topic(r), qtype(r), fmt(r.createdDateTime)||'—', r.status?tintTag(r.status,statusColor(r.status)):'—' ]));
     return;
   }
   const list = rows.map(r=>({r, s:stageSpan(r,k), hit:stageHitMs(r,k)})).filter(x=>x.hit!=null)
     .sort((a,b)=> b.hit-a.hit);
-  openDrill(title, ['Quote No','Start','End','Duration'],
-    list.map(x=>[ qlink(x.r), fmt(x.s.start)||'—',
+  openDrill(title, ['Quote No','Topic','Quote Type','Start','End','Duration'],
+    list.map(x=>[ qlink(x.r), topic(x.r), qtype(x.r), fmt(x.s.start)||'—',
       x.s.end!=null ? fmt(x.s.end) : '<span class="drill-ongoing">ongoing · now</span>',
       '<b>'+fmtDurMs(x.hit)+'</b>' ]));
 }
@@ -799,8 +812,8 @@ function drillRfq(cat){
   else if(cat==='over6'){ list = recs.filter(r=>r.done && r.rfqMs>RFQ_THRESHOLD_MS); label='Completed > 6h'; }
   else if(cat==='pending'){ list = recs.filter(r=>!r.done); label='Pending RFQ'; }
   list = list.slice().sort((a,b)=> ((b.done?b.rfqMs:b.waitMs)||0) - ((a.done?a.rfqMs:a.waitMs)||0));
-  openDrill(label+' — PR created → RFQ completion', ['PR No','Quote No','PR Created','RFQ Email','Time'],
-    list.map(x=>[ escapeHtml(x.p.purchaseRequisition||'—'), qlinkNo(x.qn), fmt(x.p.createdDate)||'—',
+  openDrill(label+' — PR created → RFQ completion', ['PR No','PR Name','Quote No','PR Created','RFQ Email','Time'],
+    list.map(x=>[ escapeHtml(x.p.purchaseRequisition||'—'), escapeHtml(x.p.name||x.p.description||x.p.title||'—'), qlinkNo(x.qn), fmt(x.p.createdDate)||'—',
       x.done ? fmt(x.emailT) : '<span class="drill-ongoing">not received</span>',
       '<b>'+(x.done ? fmtDurMs(x.rfqMs) : (x.waitMs!=null?fmtDurMs(x.waitMs):'—'))+'</b>' ]));
 }
