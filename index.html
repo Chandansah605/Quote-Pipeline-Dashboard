@@ -53,15 +53,16 @@
   .btitle{font-size:16px;font-weight:800;color:var(--c);letter-spacing:.2px;line-height:1.15;}
   .bdesc{font-size:10.5px;color:var(--muted);margin-top:2px;}
   .baccent{height:3px;width:44%;background:var(--c);border-radius:3px;margin:2px 0 2px 16px;}
-  .brow{display:flex;align-items:center;gap:10px;padding:7px 16px;border-top:1px solid #f1f4f9;}
+  .brow{display:flex;align-items:center;gap:6px;padding:7px 12px;border-top:1px solid #f1f4f9;}
   .brow:first-of-type{border-top:none;}
-  .brow .blbl{font-size:12.5px;color:var(--ink);font-weight:700;white-space:nowrap;flex:1;}
-  .bcol{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;width:64px;flex:0 0 64px;}
-  .bcol b{font-size:19px;font-weight:800;color:var(--slate);line-height:1.15;letter-spacing:-.3px;white-space:nowrap;}
-  .bdivider{width:1px;align-self:stretch;background:#EEF2F7;margin:4px 8px;}
+  .brow .blbl{font-size:11.5px;color:var(--ink);font-weight:700;white-space:nowrap;flex:1;min-width:0;}
+  .bcol{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;width:40px;flex:0 0 40px;}
+  .bcol.avg{width:72px;flex:0 0 72px;}
+  .bcol b{font-size:15px;font-weight:800;color:var(--slate);line-height:1.15;letter-spacing:-.3px;white-space:nowrap;}
+  .bdivider{width:1px;align-self:stretch;background:#EEF2F7;margin:4px 6px;}
   .brow.cur{background:linear-gradient(180deg,#f2f7fc,#eaf2fb);}
   .brow.cur .blbl{color:var(--c);}
-  .brow.cur .bcol b{font-size:21px;color:var(--c);}
+  .brow.cur .bcol b{font-size:17px;color:var(--c);}
   .delta{display:inline-flex;align-items:center;gap:2px;font-size:10.5px;font-weight:800;white-space:nowrap;line-height:1.3;margin-top:1px;}
   .delta.pos{color:var(--good);} .delta.neg{color:var(--bad);} .delta.flat{color:#9aa7b5;}
   .procHead{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#eef4fb,#f6f9fd);border:1px solid var(--line);border-left:5px solid var(--ocean);border-radius:10px;padding:7px 14px;margin-bottom:12px;}
@@ -70,17 +71,17 @@
   .procHead-s{font-size:10px;font-weight:700;color:var(--steel);letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
   .tcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:0;min-width:220px;flex:1;box-shadow:var(--shadow);border-top:4px solid var(--tc,var(--ocean));display:flex;flex-direction:column;transition:.16s;overflow:hidden;}
   .tcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
-  .tcard-top{display:flex;align-items:center;gap:11px;padding:15px 16px 12px;}
-  .tcard-ic{width:34px;height:34px;flex:0 0 34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
-  .tcard .lbl{font-size:12px;color:var(--tc,var(--slate));text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
-  .tcard-body{padding:2px 16px 16px;}
-  .tcard .big{font-size:34px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
-  .tcard .mini{font-size:11px;color:var(--muted);margin-top:6px;}
+  .tcard-top{display:flex;align-items:center;gap:10px;padding:10px 15px 7px;}
+  .tcard-ic{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:color-mix(in srgb,var(--tc,var(--ocean)) 13%,#fff);}
+  .tcard .lbl{font-size:11.5px;color:var(--tc,var(--slate));text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
+  .tcard-body{padding:0 15px 11px;}
+  .tcard .big{font-size:27px;font-weight:800;color:var(--tc,var(--ocean));line-height:1;letter-spacing:-1px;}
+  .tcard .mini{font-size:10.5px;color:var(--muted);margin-top:4px;}
   .big.good{color:var(--good);} .big.bad{color:var(--bad);}
-  .pend-age{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:5px 11px;border-radius:8px;background:rgba(192,57,43,.10);border:1px solid #e2a59e;font-size:11px;font-weight:700;color:#a4332a;text-transform:uppercase;letter-spacing:.4px;}
+  .pend-age{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 10px;border-radius:8px;background:rgba(192,57,43,.10);border:1px solid #e2a59e;font-size:11px;font-weight:700;color:#a4332a;text-transform:uppercase;letter-spacing:.4px;}
   .pend-age b{font-size:15px;font-weight:800;letter-spacing:-.2px;}
   .split-row{display:flex;border-top:1px solid var(--line);margin-top:2px;}
-  .split-row .seg{flex:1;text-align:center;padding:12px 6px 14px;}
+  .split-row .seg{flex:1;text-align:center;padding:8px 6px 9px;}
   .split-row .seg+.seg{border-left:1px solid var(--line);}
   .split-row .seg b{display:block;font-size:20px;font-weight:800;color:var(--tc,var(--ocean));line-height:1.1;letter-spacing:-.3px;}
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
@@ -631,7 +632,7 @@ function bucketCard(m,cnt,av,wb){
     let avgBlock = '';
     if(!m.count){
       const avgDelta = i<2 ? deltaDur(av[i],av[i+1]) : '';
-      avgBlock = '<span class="bdivider"></span><span class="bcol"><b>'+(av[i]!=null?fmtDurMs(av[i]):'—')+'</b>'+avgDelta+'</span>';
+      avgBlock = '<span class="bdivider"></span><span class="bcol avg"><b>'+(av[i]!=null?fmtDurMs(av[i]):'—')+'</b>'+avgDelta+'</span>';
     }
     return '<div class="brow'+(isCur?' cur':'')+'" title="'+escapeHtml(fmtRange(wb[i]))+'">'
       + '<span class="blbl">'+meta.lbl+'</span>' + cntCol + avgBlock + '</div>';
@@ -648,9 +649,14 @@ function renderProc(){
   const fromEl=document.getElementById('fromDate'), toEl=document.getElementById('toDate');
   const fromMs = (fromEl && fromEl.value) ? new Date(fromEl.value+'T00:00:00').getTime() : null;
   const toMs   = (toEl && toEl.value)   ? new Date(toEl.value  +'T23:59:59').getTime() : null;
-  let prs = dept ? PR_ROWS.filter(p=>(p.department||'')===dept) : PR_ROWS.slice();
+  // Map each quote to its dashboard department (same field the dropdown uses) so dept filtering
+  // is consistent with the table — the PR's own department string often differs / is blank.
+  const deptByQuote = {};
+  DATA.concat(TREND_DATA).forEach(r=>{ if(r.quoteNo && r.dept) deptByQuote[r.quoteNo]=r.dept; });
+  let prs = PR_ROWS.slice();
   prs = prs.filter(p=>{ const t=ms(p.createdDate); if(t==null) return false;
     if(fromMs!=null && t<fromMs) return false; if(toMs!=null && t>toMs) return false; return true; });
+  if(dept){ prs = prs.filter(p=> deptByQuote[p.quotationReference]===dept || (p.department||'')===dept ); }
   const now = Date.now();
   const recs = prs.map(p=>{
     const qn = p.quotationReference;
