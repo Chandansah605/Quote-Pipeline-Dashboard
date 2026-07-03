@@ -355,7 +355,7 @@ async function enterApp(){
   setDefaultDates();
   await refreshAll();
   if(refreshTimer) clearInterval(refreshTimer);
-  refreshTimer = setInterval(()=>refreshAll(true).catch(()=>{}), 5*60*1000);
+  refreshTimer = setInterval(()=>refreshAll(true).catch(()=>{}), 2*60*1000);
 }
 
 function signOut(){ try{ msalInstance.logoutRedirect(); }catch(e){ location.reload(); } }
@@ -464,15 +464,22 @@ async function fetchAndJoin(fromISO, toISO){
       const dEnd = earliest([prCreated, rfqEmail, internal.start, customer.start, woCreated]);
       draftEnd = dEnd!=null ? new Date(dEnd).toISOString() : '';
     }
+    // Total ageing stops once the job is finally done ("Posted WorkOrder") — frozen at End Job;
+    // otherwise it keeps counting to now.
+    const statusLabel = q['statuscode'+F] || '';
+    const finalDone = /posted\s*work\s*order/i.test(statusLabel);
+    const ageStart = ms(oppCreated);
+    const ageEnd = (finalDone && endJob) ? ms(endJob) : Date.now();
+    const ageMs = ageStart!=null ? Math.max(0, ageEnd - ageStart) : null;
     return {
       quoteNo: qn, quoteId: q.quoteid, createdDateTime: oppCreated, quoteType: quoteType,
       drafting:  { val: dur(oppCreated, draftEnd), ms: durMs(oppCreated, draftEnd), a:oppCreated, b:draftEnd },
       rfq:       { val: dur(prCreated, rfqEmail),   ms: durMs(prCreated, rfqEmail), a:prCreated,  b:rfqEmail  },
       internal, customer,
       workExec:  { val: dur(woCreated, endJob),     ms: durMs(woCreated, endJob),   a:woCreated,  b:endJob    },
-      ageing:    ageDays(oppCreated),
-      ageingMs:  ageingMsOf(oppCreated),
-      status:    q['statuscode'+F] || '',
+      ageing:    ageMs!=null ? Math.floor(ageMs/864e5) : null,
+      ageingMs:  ageMs,
+      status:    statusLabel,
       dept:      dept,
       _name: q.name||'', _prNo: pr?pr.purchaseRequisition:'', _prLoc: pr?(pr.location||pr.projectId):'',
       _woName: wo?wo.msdyn_name:'', _quoteCreated:q.createdon
@@ -557,7 +564,7 @@ function mainStatusCls(s){ s=(s||'').toLowerCase();
 
 function hashStr(s){ let h=0; s=String(s||''); for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h; }
 const STATUS_PALETTE = ['#145A95','#7E57C2','#2E8B57','#E8A33D','#C0392B'];
-function statusColor(s){ return STATUS_PALETTE[ hashStr(s) % STATUS_PALETTE.length ]; }
+function statusColor(s){ if(/posted\s*work\s*order/i.test(s)) return '#2E8B57'; /* final/completed → medium green */ return STATUS_PALETTE[ hashStr(s) % STATUS_PALETTE.length ]; }
 function quoteTypeColor(t){ t=(t||'').toLowerCase();
   if(t.indexOf('predefined')>=0) return '#145A95';
   if(t.indexOf('inspection')>=0) return '#C0392B';
@@ -631,7 +638,7 @@ function metricMs(r,k){ if(k==='ageing') return r.ageingMs!=null ? r.ageingMs : 
 // A quote "hits" a stage the moment it has a START date for it. If there is no END yet,
 // the stage is still running, so we measure to NOW (ongoing) instead of dropping the record.
 function stageSpan(r,k){
-  if(k==='ageing')   return {start: ms(r.createdDateTime), end: null};
+  if(k==='ageing'){ const fin=/posted\s*work\s*order/i.test(r.status||''); const e = fin ? (r.workExec && r.workExec.b) : null; return {start: ms(r.createdDateTime), end: ms(e)}; }
   if(k==='internal') return {start: ms(r.internal&&r.internal.start), end: ms(r.internal&&r.internal.end)};
   if(k==='customer') return {start: ms(r.customer&&r.customer.start), end: ms(r.customer&&r.customer.end)};
   const o = r[k]; return {start: ms(o&&o.a), end: ms(o&&o.b)};   // drafting / rfq / workExec use {a,b}
@@ -732,9 +739,11 @@ function rfqRecs(){
   return currentPRs().map(p=>{
     const qn = p.quotationReference;
     const emailT = qn ? EMAIL_BY_Q[qn] : null;
-    const rfqMs  = emailT ? durMs(p.createdDate, emailT) : null;
+    const done = emailT != null;                                   // RFQ completion email exists => done
+    const raw = (done && p.createdDate) ? (ms(emailT) - ms(p.createdDate)) : null;
+    const rfqMs = done ? Math.max(0, raw!=null ? raw : 0) : null;  // clamp anomalies (email logged before PR) to 0
     const waitMs = p.createdDate ? Math.max(0, now - ms(p.createdDate)) : null;
-    return { p, qn, emailT, rfqMs, waitMs, done: rfqMs!=null };
+    return { p, qn, emailT, rfqMs, waitMs, done };
   });
 }
 function renderProc(){
