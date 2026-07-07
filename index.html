@@ -97,10 +97,10 @@
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
   .wrap{padding:14px 30px 46px;overflow:auto;}
   table{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);}
-  thead tr.countrow th{position:sticky;top:0;z-index:3;background:#EAF1F8;color:var(--ocean);text-align:left;padding:6px 12px;white-space:nowrap;font-weight:800;font-size:11px;letter-spacing:.03em;border-bottom:1px solid var(--line);}
+  thead tr.countrow th{position:sticky;top:56px;z-index:2;background:#EAF1F8;color:var(--ocean);text-align:left;padding:6px 12px;white-space:nowrap;font-weight:800;font-size:11px;letter-spacing:.03em;border-bottom:1px solid var(--line);}
   thead tr.countrow th .cnum{font-size:12px;font-weight:800;color:var(--ocean);}
   thead tr.countrow th .clbl{font-size:11px;font-weight:800;color:var(--ocean);}
-  thead tr.headrow th{position:sticky;top:30px;z-index:2;background:var(--ocean);color:#fff;text-align:left;vertical-align:top;padding:9px 12px;white-space:nowrap;font-weight:700;border-right:1px solid rgba(255,255,255,.14);line-height:1.35;}
+  thead tr.headrow th{position:sticky;top:0;z-index:3;background:var(--ocean);color:#fff;text-align:left;vertical-align:top;padding:9px 12px;white-space:nowrap;font-weight:700;border-right:1px solid rgba(255,255,255,.14);line-height:1.35;}
   thead tr.headrow th .small.muted{color:rgba(255,255,255,.72);font-weight:500;}
   thead tr.headrow th .thi{margin-right:6px;}
   tbody td{padding:5px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);vertical-align:middle;}
@@ -251,7 +251,6 @@
 <div class="wrap" id="wrap" style="display:none">
   <table id="tbl">
     <thead>
-      <tr class="countrow" id="countRow"></tr>
       <tr class="headrow">
         <th><span class="thi">📄</span>Quote No</th>
         <th><span class="thi">📅</span>Created Date &amp; Time<br><span class="small muted">(parent opportunity)</span></th>
@@ -265,6 +264,7 @@
         <th><span class="thi">🕐</span>Total Job Ageing yet</th>
         <th><span class="thi">🚩</span>Quote Current Status</th>
       </tr>
+      <tr class="countrow" id="countRow"></tr>
     </thead>
     <tbody id="tbody"></tbody>
   </table>
@@ -667,6 +667,10 @@ function renderCountRow(rows){
     + cell(c.we,'executed') /* Work Execution */
     + blank                 /* Total Ageing */
     + blank;                /* Status */
+  // keep the totals row stuck right under the (variable-height) header row
+  const hr = document.querySelector('thead tr.headrow');
+  if(hr){ const h = hr.offsetHeight;
+    document.querySelectorAll('thead tr.countrow th').forEach(th=>th.style.top=h+'px'); }
 }
 
 const RFQ_THRESHOLD_MS = 6*36e5;
