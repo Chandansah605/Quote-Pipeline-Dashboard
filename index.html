@@ -73,8 +73,6 @@
   .brow.cur .blbl.bsym{color:var(--c);}
   .cfl{display:inline-flex;align-items:center;gap:5px;cursor:pointer;}
   .cfl input[type=checkbox]{width:12px;height:12px;accent-color:#E8A33D;cursor:pointer;margin:0;}
-  td.pl-r{border-bottom:1px solid #E24B4A !important;} /* progress line: red, Drafting → stuck column */
-  td.pl-g{border-bottom:1px solid #2E8B57 !important;} /* green line: Posted WorkOrder, Drafting → Work Execution */
   .brow:first-of-type{border-top:none;}
   .brow:hover{background:#f5f9fd;}
   .brow.cur:hover{background:linear-gradient(180deg,#e9f2fc,#dcebf8);}
@@ -129,7 +127,7 @@
   .split-row .seg+.seg{border-left:1px solid var(--line);}
   .split-row .seg b{display:block;font-size:20px;font-weight:800;color:var(--tc,var(--ocean));line-height:1.1;letter-spacing:-.3px;}
   .split-row .seg .seglbl{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-top:6px;}
-  .wrap{padding:14px 30px 46px;overflow:auto;} /* table scrolls inside this box; JS caps its height to the window */
+  .wrap{padding:0 30px 46px;margin-top:14px;overflow:auto;} /* NO top padding: scrolled rows would show through it above the pinned header */
   table{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;overflow:clip;box-shadow:var(--shadow);} /* overflow:clip keeps rounded corners WITHOUT breaking the sticky header (hidden would trap it) */
   thead tr.countrow th{position:sticky;top:56px;z-index:2;background:#EAF1F8;color:var(--ocean);text-align:left;padding:3px 12px;white-space:nowrap;font-weight:800;font-size:11px;letter-spacing:.03em;border-bottom:1px solid var(--line);}
   thead tr.countrow th .cnum{font-size:12px;font-weight:800;color:var(--ocean);}
@@ -270,7 +268,7 @@
   <span class="pill" id="userPill" style="display:none"></span>
   <button class="hbtn" onclick="refreshAll(true)" id="refreshBtn" style="display:none">↻ Refresh</button>
   <button class="hbtn" onclick="signOut()" id="signoutBtn" style="display:none">Sign out</button>
-  <span class="ver">v31</span>
+  <span class="ver">v33</span>
 </header>
 <div class="controls" id="controls" style="display:none">
   <div class="ctrl"><label>From</label><input type="date" id="fromDate" onchange="refreshAll()"></div>
@@ -685,31 +683,24 @@ function render(){
   tb.innerHTML = rows.map(r=>{
     const sk = stageFlags(r);
     const stuck = r._finalDone ? null : stuckStageIdx(r, sk);
-    const stuckCol = stuck==null ? null : Math.min(3+stuck, 8); // stage idx → table column idx, capped at Work Execution
-    const pc = (ci,extra)=>{ let c = extra||'';
-      if(ci>=3 && ci<=8){ // line runs only from Drafting to Work Execution
-        if(r._finalDone) c += ' pl-g';
-        else if(stuckCol!=null && ci<=stuckCol) c += ' pl-r';
-      }
-      c = c.trim(); return c ? ' class="'+c+'"' : ''; };
-    const pend = (html,i)=> (stuck===i && /class="none"/.test(html)) ? tintTag('Pending','#E8A33D') : html;
+    const pend = (html,i)=> (stuck===i && /class="none"/.test(html)) ? tintTag('Pending','#C0392B') : html;
     return `
     <tr>
-      <td${pc(0,'qno')}>${ r.quoteId ? '<a href="'+quoteUrl(r.quoteId)+'" target="_blank" rel="noopener">'+escapeHtml(r.quoteNo)+'</a>' : escapeHtml(r.quoteNo) }</td>
-      <td${pc(1)}>${dcell(r.createdDateTime)}</td>
-      <td${pc(2)}>${ r.quoteType ? tintTag(r.quoteType, quoteTypeColor(r.quoteType)) : '<span class="none">—</span>' }</td>
-      <td${pc(3)}>${pend(durCell(r.drafting,sk[0]),0)}</td>
-      <td${pc(4)}>${pend(estCell(r.est, sk[1] || !!(r.rfq && r.rfq.a)),1)}</td>
-      <td${pc(5)}>${pend(durCell(r.rfq,sk[2]),2)}</td>
-      <td${pc(6)}>${pend(apprCell(r.internal,sk[3]),3)}</td>
-      <td${pc(7)}>${pend(apprCell(r.customer,sk[4],true),4)}</td>
-      <td${pc(8)}>${pend(durCell(r.workExec,sk[5]),5)}</td>
-      <td${pc(9)}>${ r.ageingMs!=null
+      <td class="qno">${ r.quoteId ? '<a href="'+quoteUrl(r.quoteId)+'" target="_blank" rel="noopener">'+escapeHtml(r.quoteNo)+'</a>' : escapeHtml(r.quoteNo) }</td>
+      <td>${dcell(r.createdDateTime)}</td>
+      <td>${ r.quoteType ? tintTag(r.quoteType, quoteTypeColor(r.quoteType)) : '<span class="none">—</span>' }</td>
+      <td>${pend(durCell(r.drafting,sk[0]),0)}</td>
+      <td>${pend(estCell(r.est, sk[1] || !!(r.rfq && r.rfq.a)),1)}</td>
+      <td>${pend(durCell(r.rfq,sk[2]),2)}</td>
+      <td>${pend(apprCell(r.internal,sk[3],true),3)}</td>
+      <td>${pend(apprCell(r.customer,sk[4],true),4)}</td>
+      <td>${pend(durCell(r.workExec,sk[5]),5)}</td>
+      <td>${ r.ageingMs!=null
             ? ((r._finalDone && r._endJob)
                 ? '<b class="nowrap">'+fmtDaysHrs(r.ageingMs)+'</b> <span class="small nowrap" style="font-weight:700;color:var(--muted);" title="End Job: '+escapeHtml(fmt(r._endJob))+'">· '+fmtShort(r._endJob)+'</span>'
                 : '<span class="nowrap">'+fmtDaysHrs(r.ageingMs)+'</span>')
             : '<span class="none">—</span>' }</td>
-      <td${pc(10)}>${ r.status ? tintTag(r.status, statusColor(r.status)) : '<span class="none">—</span>' }</td>
+      <td>${ r.status ? tintTag(r.status, statusColor(r.status)) : '<span class="none">—</span>' }</td>
     </tr>`;
   }).join('');
   renderCountRow(rows);
@@ -761,7 +752,7 @@ function syncStickyTops(){
   document.querySelectorAll('thead tr.headrow th').forEach(th=>th.style.top='0px');
   const hr = document.querySelector('thead tr.headrow');
   if(hr){ const h = hr.offsetHeight;
-    document.querySelectorAll('thead tr.countrow th').forEach(th=>th.style.top=h+'px'); }
+    document.querySelectorAll('thead tr.countrow th').forEach(th=>th.style.top=(h-1)+'px'); } // 1px overlap: no see-through seam between the two pinned rows
 }
 window.addEventListener('resize', function(){ try{ syncStickyTops(); }catch(e){} });
 
