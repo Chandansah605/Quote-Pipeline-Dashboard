@@ -269,7 +269,7 @@
   <span class="pill" id="userPill" style="display:none"></span>
   <button class="hbtn" onclick="refreshAll(true)" id="refreshBtn" style="display:none">↻ Refresh</button>
   <button class="hbtn" onclick="signOut()" id="signoutBtn" style="display:none">Sign out</button>
-  <span class="ver">v34</span>
+  <span class="ver">v35</span>
 </header>
 <div class="controls" id="controls" style="display:none">
   <div class="ctrl"><label>From</label><input type="date" id="fromDate" onchange="refreshAll()"></div>
@@ -293,7 +293,8 @@
         <th><span class="thi">✉️</span>RFQ Process Time<br><span class="small muted">PR created → RFQ email</span></th>
         <th><span class="thi">👤</span>Internal Approval Time<br><span class="small muted">Quote-Markup</span></th>
         <th><span class="thi">✅</span>Customer Approval Time</th>
-        <th><span class="thi">🔧</span>Work Execution Time<br><span class="small muted">WO created → End Job</span></th>
+        <th><span class="thi">📆</span>Scheduling Time<br><span class="small muted">WO created → first booking</span></th>
+        <th><span class="thi">🔧</span>Work Execution Time<br><span class="small muted">booking planned → End Job</span></th>
         <th><span class="thi">🕐</span>Total Job Ageing yet</th>
         <th><span class="thi">🚩</span>Quote Current Status</th>
       </tr>
@@ -473,8 +474,9 @@ async function fetchAndJoin(fromISO, toISO){
     if(!woByQ[qn] || new Date(w.createdon) > new Date(woByQ[qn].createdon)) woByQ[qn] = w; });
   const bookByQ = {};
   bookings.forEach(b=>{ const qn = b.msdyn_workorder && b.msdyn_workorder.ssg_quotenumber; if(!qn) return;
-    const a = bookByQ[qn] || (bookByQ[qn] = { plannedStart:null, endJob:null });
+    const a = bookByQ[qn] || (bookByQ[qn] = { plannedStart:null, endJob:null, firstCreated:null });
     if(b.ssg_plannedstartdate && (a.plannedStart==null || new Date(b.ssg_plannedstartdate) < new Date(a.plannedStart))) a.plannedStart=b.ssg_plannedstartdate;
+    if(b.createdon && (a.firstCreated==null || new Date(b.createdon) < new Date(a.firstCreated))) a.firstCreated=b.createdon;
     if(b.endtime && (a.endJob==null || new Date(b.endtime) > new Date(a.endJob))) a.endJob=b.endtime; });
   const prByQ = {};
   prRows.forEach(p=>{ const qn = p.quotationReference; if(!qn) return; if(!prByQ[qn]) prByQ[qn] = p; });
@@ -488,6 +490,8 @@ async function fetchAndJoin(fromISO, toISO){
     const prCreated  = pr ? pr.createdDate : '';
     const woCreated  = wo ? wo.createdon : '';
     const endJob     = bk ? bk.endJob : '';
+    const bkCreated  = bk ? bk.firstCreated : '';
+    const bkPlanned  = bk ? bk.plannedStart : '';
     const internal   = apprSpan(appr,[2,5,10]);
     const customer   = apprSpan(appr,[4]);
     // "Estimation without PR" approvals (type 13) — split by approver role.
@@ -527,7 +531,9 @@ async function fetchAndJoin(fromISO, toISO){
       rfq:       { val: dur(prCreated, rfqEmail),   ms: durMs(prCreated, rfqEmail), a:prCreated,  b:rfqEmail  },
       est:       { proc:estProc, ops:estOps, other:estOther, any:estRecs.length>0 },
       internal, customer,
-      workExec:  { val: dur(woCreated, endJob),     ms: durMs(woCreated, endJob),   a:woCreated,  b:endJob    },
+      scheduling:{ val: dur(woCreated, bkCreated),  ms: durMs(woCreated, bkCreated), a:woCreated, b:bkCreated },
+      workExec:  { val: dur(bkPlanned, endJob),     ms: durMs(bkPlanned, endJob),   a:bkPlanned,  b:endJob    },
+      _plannedStart: bkPlanned,
       ageing:    ageMs!=null ? Math.floor(ageMs/864e5) : null,
       ageingMs:  ageMs,
       status:    statusLabel,
@@ -628,7 +634,7 @@ function quoteTypeColor(t){ t=(t||'').toLowerCase();
 function tintTag(txt,color){ return '<span class="tag" style="color:'+color+';background:'+color+'1A;border-color:'+color+'59">'+escapeHtml(txt)+'</span>'; }
 
 function stageFlags(r){
-  const has=[ r.drafting.val!=null, !!(r.est&&r.est.any), r.rfq.val!=null, !!(r.internal&&r.internal.status), !!(r.customer&&r.customer.status), r.workExec.val!=null ];
+  const has=[ r.drafting.val!=null, !!(r.est&&r.est.any), r.rfq.val!=null, !!(r.internal&&r.internal.status), !!(r.customer&&r.customer.status), !!(r.scheduling&&r.scheduling.val!=null), r.workExec.val!=null ];
   return has.map((h,i)=> h ? false : has.slice(i+1).some(Boolean));
 }
 // "Estimation Without PR" cell — one row per approver role (Procurement / Operations)
@@ -650,13 +656,14 @@ const COL_FILTER_DEFS = {
   rfq: r => r.rfq && r.rfq.val!=null,
   ia:  r => r.internal && r.internal.status,
   ca:  r => r.customer && r.customer.status,
+  sch: r => r.scheduling && r.scheduling.val!=null,
   we:  r => r.workExec && r.workExec.val!=null
 };
 let COL_FILTERS = {};
 function toggleColFilter(k,on){ if(on) COL_FILTERS[k]=1; else delete COL_FILTERS[k]; render(); }
 
 // Where is this quote STUCK? First stage that is neither finished nor skipped (in-progress counts as stuck).
-// Stage indexes: 0 drafting, 1 estimation, 2 rfq, 3 internal, 4 customer, 5 workExec. Returns 6 = all stages done, awaiting "Posted WorkOrder".
+// Stage indexes: 0 drafting, 1 estimation, 2 rfq, 3 internal, 4 customer, 5 scheduling, 6 workExec. Returns 7 = all done, awaiting "Posted WorkOrder".
 function stuckStageIdx(r, sk){
   const est = r.est || {};
   const roles = [est.proc, est.ops, est.other].filter(Boolean);
@@ -669,10 +676,11 @@ function stuckStageIdx(r, sk){
     r.rfq && r.rfq.val!=null,
     r.internal && r.internal.end!=null,
     r.customer && r.customer.end!=null,
+    r.scheduling && r.scheduling.val!=null,
     r.workExec && r.workExec.val!=null
   ];
-  for(let i=0;i<6;i++){ if(sk[i]) continue; if(!done[i]) return i; }
-  return 6;
+  for(let i=0;i<7;i++){ if(sk[i]) continue; if(!done[i]) return i; }
+  return 7;
 }
 
 function render(){
@@ -696,7 +704,8 @@ function render(){
       <td>${pend(durCell(r.rfq,sk[2],3*36e5),2)}</td>
       <td>${pend(apprCell(r.internal,sk[3],true,30*6e4),3)}</td>
       <td>${pend(apprCell(r.customer,sk[4],true),4)}</td>
-      <td>${pend(durCell(r.workExec,sk[5]),5)}</td>
+      <td>${pend(durCell(r.scheduling,sk[5]),5)}</td>
+      <td>${pend(durCell(r.workExec,sk[6]),6)}${ (/scheduled\s*work\s*order/i.test(r.status||'') && r._plannedStart) ? ' <span class="small nowrap" style="color:var(--muted);font-weight:700;" title="Booking planned start: '+escapeHtml(fmt(r._plannedStart))+'">('+fmtShort(r._plannedStart)+')</span>' : '' }</td>
       <td>${ r.ageingMs!=null
             ? ((r._finalDone && r._endJob)
                 ? '<b class="nowrap">'+fmtDaysHrs(r.ageingMs)+'</b> <span class="small nowrap" style="font-weight:700;color:var(--muted);" title="End Job: '+escapeHtml(fmt(r._endJob))+'">· '+fmtShort(r._endJob)+'</span>'
@@ -717,6 +726,7 @@ function renderCountRow(rows){
     rfq:  rows.filter(r=>r.rfq && r.rfq.val!=null).length,
     ia:   rows.filter(r=>r.internal && r.internal.status).length,
     ca:   rows.filter(r=>r.customer && r.customer.status).length,
+    sch:  rows.filter(r=>r.scheduling && r.scheduling.val!=null).length,
     we:   rows.filter(r=>r.workExec && r.workExec.val!=null).length,
     ag:   rows.filter(r=>r.ageingMs!=null).length,
     st:   rows.filter(r=>r.status).length,
@@ -740,6 +750,7 @@ function renderCountRow(rows){
     + cell(c.rfq,'rfq','rfq')     /* RFQ Process */
     + cell(c.ia,'internal','ia')  /* Internal Approval */
     + cell(c.ca,'customer','ca')  /* Customer Approval */
+    + cell(c.sch,'scheduled','sch') /* Scheduling Time */
     + cell(c.we,'executed','we')  /* Work Execution */
     + blank                 /* Total Ageing */
     + blank;                /* Status */
@@ -798,7 +809,7 @@ const TREND_METRICS=[
   {k:'rfq',      label:'RFQ Process (Proc)', desc:'Estimation approval · PR → RFQ', c:'#145A95', icon:'📨', split:'est'},
   {k:'internal', label:'Internal Approval', desc:'Quote + Markup',      c:'#7E57C2', icon:'🛡️'},
   {k:'customer', label:'Customer Approval', desc:'customer sign-off',   c:'#2E8B57', icon:'🤝'},
-  {k:'workExec', label:'Work Execution',    desc:'WO → End Job',        c:'#E8A33D', icon:'🔧'},
+  {k:'workExec', label:'Work Execution',    desc:'booking planned → End Job', c:'#E8A33D', icon:'🔧'},
   {k:'ageing',   label:'Total Ageing',      desc:'opp created → now',   c:'#C0392B', icon:'⏳'}
 ];
 
